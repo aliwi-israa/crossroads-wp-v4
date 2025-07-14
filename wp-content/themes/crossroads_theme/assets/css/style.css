@@ -2708,7 +2708,7 @@ background-color: var(--secondary-color);
   content: '';
 }
 
-.service-header {
+.service-header, .main-content h2 {
   font-size:32px;
 }
 
@@ -2751,7 +2751,8 @@ span.service-item, ul.checked li {
 
 ul.checked li::before, .page-template-default main ul.wp-block-list li::before,
   .main-content ul:not(header ul):not(footer ul):not(.sidebar ul):not(ul.services-icon-list)  li::before,
-  .page-template-default main ul li::before {
+  .page-template-default main ul li::before ,
+  ul.wp-block-list li:before {
     content: "\f00c"; 
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
@@ -2759,11 +2760,14 @@ ul.checked li::before, .page-template-default main ul.wp-block-list li::before,
     margin-right: 8px;
 }
 
-.page-template-default main ul li, .main-content ul:not(header ul):not(footer ul):not(.sidebar ul):not(ul.services-icon-list) li {
+  ul.wp-block-list li, .service-items li {
+  margin-bottom: 24px;
+  }
+.page-template-default main ul li, ul.wp-block-list li, .main-content ul:not(header ul):not(footer ul):not(.sidebar ul):not(ul.services-icon-list) li {
   list-style: none;
 
 }
-.page-template-default main ul, .main-content ul:not(header ul):not(footer ul):not(.sidebar ul):not(ul.services-icon-list)  { 
+.page-template-default main ul, ul.wp-block-list , .main-content ul:not(header ul):not(footer ul):not(.sidebar ul):not(ul.services-icon-list)  { 
   margin-left: 0;
   /* padding-left: 10px; */
     padding-left: 0;
@@ -2783,7 +2787,6 @@ header.header-mobile #mainmenu li > ul > li > span {
     align-items: center;
     justify-content: center;
 }
-
 
 header.header-mobile #mainmenu > li > span i,
 header.header-mobile #mainmenu li > ul > li > span i {
@@ -2940,6 +2943,9 @@ body {
   animation: spin 1s ease-in-out infinite;
 }
 
+header li.menu-item-has-children > a {
+  font-size: inherit;
+}
 @keyframes spin {
   to {
     transform: rotate(360deg);

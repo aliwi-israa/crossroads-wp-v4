@@ -8,8 +8,6 @@ get_header();
   <div class="no-bottom no-top" id="content">
         <div id="top"></div>
         <?php get_template_part('partials/hero-archive'); ?>
-         <!-- get_template_part('partials/breadcrumbs');  -->
-
         <section>
         <div class="page-content">
             <div class="section page-content-first">

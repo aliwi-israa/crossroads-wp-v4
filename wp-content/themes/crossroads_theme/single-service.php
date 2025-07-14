@@ -54,32 +54,27 @@
                                     ?>
                                     <?php if ($video_count === 1): // Layout for a single video ?>
                                         <?php
-                                        // Get the single video's data
                                         $first_video = $service_videos_rows[0];
-                                        // Correct: video_embed is a sub-field of the repeater row,
-                                        // so you access it directly from the $first_video array.
                                         $video_popover_embed = $first_video['video_embed'];
                                         ?>
                                         <div class="educational-video single mb-4">
                                             <h3><?php echo $display_video_section_title; ?></h3>
                                             <?php if ($video_popover_embed): ?>
-                                                <?php echo $video_popover_embed; // Output the full Wistia popover HTML ?>
+                                                <?php echo $video_popover_embed; ?>
                                             <?php endif; ?>
                                         </div>
-                                      <?php else: // Layout for multiple videos ?>
+                                      <?php else: ?>
                                           <div class="educational-video single mb-4">
                                               <h3><?php echo $display_video_section_title; ?></h3>
                                               <div class="video-container">
                                                   <?php foreach ($service_videos_rows as $video_row): ?>
                                                       <?php
-                                                      // Correct: video_embed is a sub-field of the repeater row,
-                                                      // so you access it directly from the $video_row array.
                                                       $video_popover_embed = $video_row['video_embed'];
                                                       ?>
-                                                      <?php if ($video_popover_embed): // Only render if embed code exists ?>
+                                                      <?php if ($video_popover_embed): ?>
                                                           <div class="video">
-                                                              <?php // No individual video title here ?>
-                                                              <?php echo $video_popover_embed; // Output the full Wistia popover HTML ?>
+                                                              <?php ?>
+                                                              <?php echo $video_popover_embed;  ?>
                                                           </div>
                                                       <?php endif; ?>
                                                   <?php endforeach; ?>
@@ -89,7 +84,7 @@
                                 <?php endif; ?>
                             </section>
                             <?php
-                            $faq_posts = get_field('services_faqs'); // Returns array of post objects (FAQ posts)
+                            $faq_posts = get_field('services_faqs');
                             if (!empty($faq_posts)) :
                             ?>
                             <section class="bg-light faq-list" style="background-size: cover; background-repeat: no-repeat;">
@@ -144,5 +139,5 @@
         </div>
     </div>
 </div>
-
+<script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/popover-v1.js"></script>
 <?php get_footer(); ?>

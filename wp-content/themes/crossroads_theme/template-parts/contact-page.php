@@ -29,16 +29,10 @@ $contact_form_embed  = get_field('form');
                             <div class="fw-bold text-dark">
                                 <i class="fs-14 id-color fa-solid fa-clock me-2"></i>Opening Hours
                             </div>
-                        <?php if (have_rows('office_hours', 'option')) : ?>
-                        <?php while (have_rows('office_hours', 'option')) : the_row(); 
-                            $day = get_sub_field('days');
-                            $hours = get_sub_field('hours');
-                        ?>
-                        <p><?php echo esc_html($day); ?>: <?php echo esc_html($hours); ?></p>
-                        <?php endwhile; ?>
-                        <?php else : ?>
-                        <p>Mon to Sat 09:00 - 18:00</p>
-                        <?php endif; ?>
+                             <?php
+                            $office_hours = get_field('office_hours', 'option');
+                            echo '<p>'.$office_hours.'</p>';
+                            ?>
                         </div>
 
                         <div class="col-lg-6">

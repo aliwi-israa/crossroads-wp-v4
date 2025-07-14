@@ -194,37 +194,13 @@ add_action( 'wp_enqueue_scripts', 'crossroads_enqueue_google_fonts' );
 /**
  * Add fonts.
  */
-// function crossroads_add_editor_styles() {
-//     add_theme_support( 'editor-styles' );
-//     // Enqueue Urbanist for the editor
-//     wp_enqueue_style(
-//         'google-font-urbanist-editor',
-//         'https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap',
-//         array(),
-//         null
-//     );
-
-//     // Enqueue Inter for the editor
-//     wp_enqueue_style(
-//         'google-font-inter-editor',
-//         'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap',
-//         array(),
-//         null
-//     );
-// }
-// add_action( 'after_setup_theme', 'crossroads_add_editor_styles' );
 function crossroads_add_editor_styles() {
-    // Check if we are in the admin area and if the current screen is relevant
-    // (e.g., for post/page editing screens).
-    // This check can be more specific if needed, e.g., get_current_screen()->base === 'post'
     if (is_admin()) {
         wp_enqueue_style('google-font-urbanist-editor', 'https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap', [], null);
         wp_enqueue_style('google-font-inter-editor', 'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap', [], null);
     }
 }
-// Change the hook from 'after_setup_theme' to 'admin_enqueue_scripts'
 add_action('admin_enqueue_scripts', 'crossroads_add_editor_styles');
-
 
 function crossroads_enqueue_block_editor_assets() {
     wp_enqueue_style(
@@ -250,8 +226,8 @@ function crossroads_enqueue_styles() {
   wp_enqueue_style('critical-css', get_template_directory_uri() . '/assets/css/critical.css');
   wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
 	wp_enqueue_style('swiper-css', get_template_directory_uri() . '/assets/css/swiper.css');
-  wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/style.css');
-	wp_enqueue_style('custom-mobile.css', get_template_directory_uri() . '/assets/css/style-mobile.css');
+  wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/style.min.css');
+	wp_enqueue_style('custom-mobile.css', get_template_directory_uri() . '/assets/css/style-mobile.min.css');
 
 }
 add_action('wp_enqueue_scripts', 'crossroads_enqueue_styles');
@@ -264,7 +240,7 @@ function crossroads_enqueue_scripts() {
     wp_enqueue_script('plugins-js', get_template_directory_uri() . '/assets/js/plugins.js', ['jquery'], null, true);
 	wp_enqueue_script('designesia-js', get_template_directory_uri() . '/assets/js/designesia.min.js', ['jquery', 'plugins-js'], null, true);
     wp_enqueue_script('swiper-js', get_template_directory_uri() . '/assets/js/swiper.js', ['jquery'], null, true);
-    wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/custom.js', ['jquery', 'designesia-js'], null, true);
+    wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/custom.min.js', ['jquery', 'designesia-js'], null, true);
 }
 add_action('wp_enqueue_scripts', 'crossroads_enqueue_scripts');
 /**
@@ -282,17 +258,7 @@ add_action('wp_enqueue_scripts', 'crossroads_enqueue_fontawesome');
 /**
  * Config
  */
-// if (function_exists('acf_add_options_page')) {
-//   acf_add_options_page([
-//     'page_title' => 'Website Settings',
-//     'menu_title' => 'Website Settings',
-//     'menu_slug'  => 'site-settings',
-//     'capability' => 'edit_posts',
-//     'redirect'   => false
-//   ]);
-// }
 function my_acf_options_page_init() {
-    // Check if function exists to avoid errors if ACF is not active
     if (function_exists('acf_add_options_page')) {
         acf_add_options_page([
             'page_title' => 'Website Settings',
@@ -304,6 +270,144 @@ function my_acf_options_page_init() {
     }
 }
 add_action('acf/init', 'my_acf_options_page_init');
+/**
+* Walker class to render toggle arrows
+*/
+class Custom_Mobile_Menu_Walker extends Walker_Nav_Menu {
+    /**
+     * Starts the element output.
+     *
+     * @see Walker_Nav_Menu::start_el()
+     *
+     * @since 3.0.0
+     *
+     * @param string   $output Used to append additional content (passed by reference).
+     * @param WP_Post  $item   Menu item data object.
+     * @param int      $depth  Depth of menu item. Used for padding.
+     * @param stdClass $args   An object of wp_nav_menu() arguments.
+     * @param int      $id     Current item ID.
+     */
+    public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
+        if ( isset( $args->item_spacing ) && 'discard' === $args->item_spacing ) {
+            $t = '';
+            $n = '';
+        } else {
+            $t = "\t";
+            $n = "\n";
+        }
+
+        $indent = ( $depth ) ? str_repeat( $t, $depth ) : '';
+
+        $classes = empty( $item->classes ) ? array() : (array) $item->classes;
+        $classes[] = 'menu-item-' . $item->ID;
+
+        /**
+         * Filters the arguments for a single nav menu item.
+         *
+         * @since 4.4.0
+         *
+         * @param stdClass $args  An object of wp_nav_menu() arguments.
+         * @param WP_Post  $item  Menu item data object.
+         * @param int      $depth Depth of menu item. Used for padding.
+         */
+        $args = apply_filters( 'nav_menu_item_args', $args, $item, $depth );
+
+        /**
+         * Filters the CSS classes applied to a menu item's list item element.
+         *
+         * @since 3.0.0
+         * @since 4.1.0 The `$depth` parameter was added.
+         *
+         * @param string[] $classes Array of the CSS classes that are applied to the menu item's `<li>` element.
+         * @param WP_Post  $item    The current menu item.
+         * @param stdClass $args    An object of wp_nav_menu() arguments.
+         * @param int      $depth   Depth of menu item. Used for padding.
+         */
+        $class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
+        $class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+
+        /**
+         * Filters the ID applied to a menu item's list item element.
+         *
+         * @since 3.0.0
+         * @since 4.1.0 The `$depth` parameter was added.
+         *
+         * @param string   $menu_id The ID that is applied to the menu item's `<li>` element.
+         * @param WP_Post  $item    The current menu item.
+         * @param stdClass $args    An object of wp_nav_menu() arguments.
+         * @param int      $depth   Depth of menu item. Used for padding.
+         */
+        $id = apply_filters( 'nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args, $depth );
+        $id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
+
+        $output .= $indent . '<li' . $id . $class_names . '>';
+
+        $atts = array();
+        $atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
+        $atts['target'] = ! empty( $item->target )     ? $item->target     : '';
+        if ( '_blank' === $item->target && empty( $item->xfn ) ) {
+            $atts['rel'] = 'noopener';
+        }
+        $atts['href'] = ! empty( $item->url )        ? $item->url        : '';
+        $atts['aria-current'] = $item->current ? 'page' : '';
+
+        /**
+         * Filters the HTML attributes applied to a menu item's anchor element.
+         *
+         * @since 3.6.0
+         * @since 4.1.0 The `$depth` parameter was added.
+         *
+         * @param array    $atts   {
+         * The HTML attributes applied to the menu item's `<a>` element, empty strings are ignored.
+         *
+         * @type string $title        Title attribute.
+         * @type string $target       Target attribute.
+         * @type string $rel          The rel attribute.
+         * @type string $href         The href attribute.
+         * @type string $aria_current The aria-current attribute.
+         * }
+         * @param WP_Post  $item   The current menu item.
+         * @param stdClass $args   An object of wp_nav_menu() arguments.
+         * @param int      $depth  Depth of menu item. Used for padding.
+         */
+        $atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
+
+        $attributes = '';
+        foreach ( $atts as $attr => $value ) {
+            if ( is_scalar( $value ) && '' !== $value && false !== $value ) {
+                $value = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
+                $attributes .= ' ' . $attr . '="' . $value . '"';
+            }
+        }
+
+        /** This filter is documented in wp-includes/post-template.php */
+        $title = apply_filters( 'the_title', $item->title, $item->ID );
+
+        /**
+         * Filters a menu item's title.
+         *
+         * @since 3.0.0
+         * @since 4.4.0 The `$depth` parameter was added.
+         *
+         * @param string   $title The menu item's title.
+         * @param WP_Post  $item  The current menu item.
+         * @param stdClass $args  An object of wp_nav_menu() arguments.
+         * @param int      $depth Depth of menu item. Used for padding.
+         */
+        $title = apply_filters( 'nav_menu_item_title', $title, $item, $args, $depth );
+
+        $item_output = $args->before . '<a' . $attributes . ' class="menu-item">' . $args->link_before . $title . $args->link_after . '</a>' . $args->after;
+
+        // --- THIS IS THE CRUCIAL PART ---
+        // If the menu item has children, add the span with the Font Awesome icon
+        if ( in_array( 'menu-item-has-children', $item->classes ) ) {
+            $item_output .= '<span><i class="fas fa-chevron-down d-flex d-lg-none"></i></span>';
+        }
+        // --- END CRUCIAL PART ---
+
+        $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
+    }
+}
 /**
  * header menu
  */
@@ -326,158 +430,15 @@ function add_custom_body_class($classes) {
 }
 add_filter('body_class', 'add_custom_body_class');
 /**
- * create dyamic navbar
- */
-class Services_Menu_Walker extends Walker_Nav_Menu {
-
-    /**
-     * Starts the list of the current level of the tree.
-     *
-     * @param string $output Used to append additional content (passed by reference).
-     * @param int    $depth Depth of the current menu item.
-     * @param array  $args   An array of arguments.
-     */
-    public function start_lvl( &$output, $depth = 0, $args = null ) {
-        // Add a class for sub-menus, useful for styling
-        $output .= '<ul class="sub-menu depth-' . esc_attr($depth) . '">';
-    }
-
-    /**
-     * Ends the list of the current level of the tree.
-     *
-     * @param string $output Used to append additional content (passed by reference).
-     * @param int    $depth Depth of the current menu item.
-     * @param array  $args   An array of arguments.
-     */
-    public function end_lvl( &$output, $depth = 0, $args = null ) {
-        $output .= '</ul>';
-    }
-
-    /**
-     * Starts the element output.
-     *
-     * @param string  $output Used to append additional content (passed by reference).
-     * @param WP_Post $item   Menu item data object.
-     * @param int     $depth  Depth of menu item. Used for padding.
-     * @param array   $args   An array of arguments.
-     * @param int     $id     Current item ID.
-     */
-    public function start_el( &$output, $item, $depth = 0, $args = null, $id = 0 ) {
-        $title   = esc_html($item->title);
-        $url     = esc_url($item->url);
-        $classes = implode(' ', $item->classes ?? []);
-
-        // Check if this is the "Services" menu item at the top level (depth 0)
-        // This allows you to create a "Services" menu item in Appearance > Menus
-        // and have this walker dynamically populate its children.
-        if (stripos($title, 'Services') !== false && $depth === 0) {
-            // Start the main "Services" parent menu item
-            $output .= '<li class="menu-item-has-children has-child ' . esc_attr($classes) . '">';
-            // Link to the main services archive page
-            $output .= '<a class="menu-item" href="' . home_url('/services/') . '">' . $title . '</a>';
-            // Add a dropdown icon for mobile/responsive menus
-            $output .= '<span><i class="fas fa-chevron-down d-flex d-lg-none"></i></span>';
-            
-            // Start the sub-menu for service categories
-            $output .= '<ul class="sub-menu">';
-
-            // Get top-level service categories
-            $categories = get_terms([
-                'taxonomy'   => 'service-category',
-                'hide_empty' => false,
-                // 'orderby'    => 'name', // Default alphabetical order
-                // For custom order, use 'orderby' => 'meta_value_num' and 'meta_key' => 'term_order_field_name'
-                // after implementing a custom field for term order.
-                // Or, if using a plugin like "Category Order and Taxonomy Terms Order", it might
-                // automatically adjust the default query or provide a specific 'orderby' value.
-                'parent'     => 0, // Only get top-level categories
-            ]);
-
-            if (!empty($categories) && !is_wp_error($categories)) {
-                foreach ($categories as $cat) {
-                    // Start a list item for each service category
-                    $output .= '<li class="has-child">';
-                    // Correct URL for service category archive: /services/{category-slug}/
-                    $output .= '<a href="' . home_url('/services/' . $cat->slug . '/') . '">' . esc_html($cat->name) . '</a>';
-                    // Add a dropdown icon for mobile/responsive menus
-                    $output .= '<span><i class="fas fa-chevron-down d-flex d-lg-none"></i></span>';
-                    
-                    // Start the sub-menu for services within this category
-                    $output .= '<ul class="sub-menu">';
-
-                    // Get services (posts) associated with this category and its children
-                    $services = get_posts([
-                        'post_type'      => 'service',
-                        'post_status'    => 'publish',
-                        'posts_per_page' => -1, // Get all services
-                        'orderby'        => 'menu_order', // Order by 'Order' field in post editor
-                        'order'          => 'ASC',
-                        'tax_query'      => [[
-                            'taxonomy'         => 'service-category',
-                            'field'            => 'term_id',
-                            'terms'            => $cat->term_id, // Get posts directly in this category
-                            'include_children' => true, // Also include posts in child categories
-                        ]],
-                    ]);
-
-                    if ($services) {
-                        foreach ($services as $service) {
-                            // Link to individual service post
-                            $output .= '<li><a href="' . get_permalink($service->ID) . '">' . esc_html($service->post_title) . '</a></li>';
-                        }
-                    } else {
-                        // Optional: Display a message if no services are found for a category
-                        // $output .= '<li><a href="#">No services in this category</a></li>';
-                    }
-
-                    $output .= '</ul></li>'; // End service category sub-menu and list item
-                }
-            } else {
-                $output .= '<li><a href="#">No service categories found</a></li>';
-            }
-
-            $output .= '</ul></li>'; // End main "Services" sub-menu and list item
-
-        } else {
-            // Render regular menu items (not the special "Services" item)
-            $output .= '<li class="' . esc_attr($classes) . '">';
-            $output .= '<a class="menu-item" href="' . $url . '">' . $title . '</a>';
-            // If the item has children, you might want to add the dropdown span here too
-            if (in_array('menu-item-has-children', $item->classes ?? [])) {
-                $output .= '<span><i class="fas fa-chevron-down d-flex d-lg-none"></i></span>';
-            }
-            // The Walker handles the sub-level <ul> and </ul> tags automatically for regular items
-        }
-    }
-
-    /**
-     * Ends the element output.
-     *
-     * @param string  $output Used to append additional content (passed by reference).
-     * @param WP_Post $item   Menu item data object.
-     * @param int     $depth  Depth of menu item. Used for padding.
-     * @param array   $args   An array of arguments.
-     */
-    public function end_el( &$output, $item, $depth = 0, $args = null ) {
-        $output .= '</li>';
-    }
-}
-/**
  * listener to change slug when a post name is changed
  */
 add_action('save_post', function ($post_id) {
-    // Only run for 'team' post type
     if (get_post_type($post_id) !== 'team') return;
 
-    // Don't run on autosave or quick edit
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-
-    // Get current slug and title
     $post = get_post($post_id);
     $current_slug = $post->post_name;
     $new_slug = sanitize_title($post->post_title);
-
-    // Only update if slug doesn't match title and wasn't manually changed
     if ($current_slug !== $new_slug && !isset($_POST['post_name'])) {
         wp_update_post([
             'ID' => $post_id,
@@ -509,12 +470,10 @@ add_action('init', function () {
  * remove default padding in patterns
  */
 function enqueue_pattern_padding_remover_script() {
-    // Check if the script should be loaded only on specific pages/posts if needed
-    // For now, it will load on all pages.
     wp_enqueue_script(
         'pattern-padding-remover',
         get_template_directory_uri() . '/assets/js/pattern-padding-remover.js',
-        array('jquery'), // Add jQuery as a dependency if you use it, otherwise remove.
+        array('jquery'),
         filemtime(get_template_directory() . '/assets/js/pattern-padding-remover.js'), // Cache busting
         true // Load in the footer
     );

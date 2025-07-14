@@ -10,7 +10,7 @@ $categories     = get_terms([
 
 if (!empty($categories)) :
 ?>
-<div class="col-md d-md-none d-md-block sidebar">
+<div class="col-md d-none d-md-block sidebar">
   <ul class="services-nav flex-column flex-nowrap d-none d-md-block">
     <?php foreach ($categories as $index => $term) :
       $slug       = $term->slug;
@@ -29,14 +29,9 @@ if (!empty($categories)) :
         ]],
       ]);
 
-      // Detect if current page is parent term or child service
       $is_term_page        = is_tax('service-category', $term);
       $has_current_service = $is_service && has_term($term->term_id, 'service-category', $current_id);
-
-      // Parent is always marked active on term or child pages
       $parent_class = ($is_term_page || $has_current_service) ? 'active-parent' : '';
-
-      // Expand submenu only if on child page
       $toggle_class = $has_current_service ? 'show' : '';
     ?>
     <li class="nav-item">

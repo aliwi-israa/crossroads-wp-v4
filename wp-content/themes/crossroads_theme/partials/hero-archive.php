@@ -14,17 +14,11 @@ if (is_singular()) {
     if (is_singular('service')) {
         $subheading = 'Services'; // Hardcoded for single service pages
     } else if (is_singular('faq')) {
-        // Assuming 'faq_subheading' is a field on the individual FAQ post
         $subheading = get_field('faq_subheading');
-        // If it's a global option for all FAQs, use:
-        // $subheading = get_field('faq_subheading', 'option');
     } else {
-        // For all other singular pages (standard Pages, custom post types not explicitly handled)
-        // Use the new 'hero_subheading' field from the page's ACF.
         $subheading = get_field('hero_subheading');
     }
 
-    // Assuming hero_description is a field on the individual page/post
     $description = get_field('hero_description');
 
 } elseif (is_archive() || is_tax()) {

@@ -59,14 +59,11 @@
                         $permalink = get_permalink();
                         $team_member_title = get_the_title(); // Get the post title (dentist's name)
 
-                        // Get featured image URLs for different sizes
-                        // Ensure your theme registers these image sizes if they are custom,
-                        // otherwise 'medium', 'large', 'full' are standard WP sizes.
                         $feat_image_url_small = get_the_post_thumbnail_url(get_the_ID(), 'medium'); // Typically 300px width
                         $feat_image_url_medium = get_the_post_thumbnail_url(get_the_ID(), 'large');  // Typically 1024px width
                         $feat_image_url_large = get_the_post_thumbnail_url(get_the_ID(), 'full');   // Original uploaded size
 
-                ?>
+                        ?>
                         <div class="col-lg-3 col-md-6" style="background-size: cover; background-repeat: no-repeat;">
                             <a href="<?php echo esc_url($permalink); ?>" class="d-block text-decoration-none text-dark">
                                 <div class="relative rounded-1 overflow-hidden h-100" style="background-size: cover; background-repeat: no-repeat;">

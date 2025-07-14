@@ -23,23 +23,17 @@
   </div>
   <?php endif; ?>
 
-  <?php if (have_rows('category_body')): ?>
   <section class="pt-0 pb-0">
     <div class="service-items">
-      <?php while (have_rows('category_body')) : the_row();
-          $section_title = get_sub_field('title');
-          $section_desc  = get_sub_field('desc');
-        ?>
-      <?php if ($section_title): ?>
-      <h3 class="wow fadeInUp" data-wow-delay=".2s"><?php echo esc_html($section_title); ?></h3>
-      <?php endif; ?>
-      <?php if ($section_desc): ?>
-      <p><?php echo wp_kses_post($section_desc); ?></p>
-      <?php endif; ?>
-      <?php endwhile; ?>
+    <?php
+    $category_content = get_sub_field('category_body');
+    if ( ! empty( $category_content ) ) {
+        echo wp_kses_post( $category_content );
+    }
+    ?>
       <?php $services_query_args=array('post_type'=> 'service', 'posts_per_page'=> -1, 'tax_query'=> array(array('taxonomy'=> 'service-category', 'field'=> 'term_id', 'terms'=> $term->term_id, 'include_children'=> true, ), ), 'orderby'=> 'title', 'order'=> 'ASC', 'post_status'=> 'publish', );
       $services=new WP_Query($services_query_args);
-      if ($services->have_posts()) : ?><ul class="fw-500 mb-4 wow fadeInUp services-icon-list" data-wow-delay=".6s">
+      if ($services->have_posts()) : ?><ul class="fw-500 mb-4 wow fadeInUp services-icon-list p-0" data-wow-delay=".6s">
 
         <?php while ($services->have_posts()) : $services->the_post();
         $service_title=get_the_title();
@@ -78,4 +72,3 @@
         ?>
     </div>
   </section>
-  <?php endif; ?>

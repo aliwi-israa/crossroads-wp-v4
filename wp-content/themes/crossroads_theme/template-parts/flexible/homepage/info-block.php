@@ -21,16 +21,11 @@
                     <i class="id-color fa-solid fa-clock fs-1 fs-md-2 fs-lg-3"></i>
                     <div class="ms-3 text">
                         <h4 class="mb-0">Opening Hours</h4>
-                        <?php if (have_rows('office_hours', 'option')) : ?>
-                        <?php while (have_rows('office_hours', 'option')) : the_row(); 
-                            $day = get_sub_field('days');
-                            $hours = get_sub_field('hours');
-                        ?>
-                        <p><?php echo esc_html($day); ?>: <?php echo esc_html($hours); ?></p>
-                        <?php endwhile; ?>
-                        <?php else : ?>
-                        <p>Mon to Sat 09:00 - 18:00</p>
-                        <?php endif; ?>
+                            <?php
+                                $office_hours = get_field('office_hours', 'option');
+                                echo '<p>'.$office_hours.'</p>';
+                            ?>
+
                     </div>
                 </div>
             </div>

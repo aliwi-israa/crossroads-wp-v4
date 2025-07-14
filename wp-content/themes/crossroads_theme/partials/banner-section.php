@@ -3,7 +3,6 @@
 $real_object = get_queried_object();
 
 if (is_singular('service')) {
-    // For single service posts, walk up to the top-level parent
     $top_level_post = $real_object;
     while ($top_level_post->post_parent != 0) {
         $top_level_post = get_post($top_level_post->post_parent);
@@ -11,16 +10,13 @@ if (is_singular('service')) {
     $top_level_id = $top_level_post->ID;
 
 } elseif (is_tax('service-category')) {
-    // For taxonomy term archives, use the term ID to get ACF fields
     $top_level_id = $real_object->term_id;
     $is_term = true;
 
 } else {
-    // Fallback for other contexts
     $top_level_id = get_the_ID();
 }
 
-// Step 2: Pull ACF fields
 if (!empty($is_term)) {
     // For taxonomy term, use term-specific ACF functions
     $show_banner = get_field('show_banner', 'service-category_' . $top_level_id);

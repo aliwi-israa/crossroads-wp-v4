@@ -16,7 +16,6 @@
       <div class="col-md-12">
         <div class="de-flex sm-pt10 wrapper">
 
-          <!-- ✅ Logo -->
           <div class="de-flex-col">
             <div id="logo">
               <a href="<?php echo home_url(); ?>">
@@ -27,31 +26,29 @@
             </div>
           </div>
 
-          <!-- ✅ Navigation -->
           <div class="de-flex-col header-col-mid">
             <?php
             wp_nav_menu([
               'theme_location' => 'main_menu',
               'menu_id'        => 'mainmenu',
               'container'      => false,
-              'walker'         => new Services_Menu_Walker()
+              'walker'         => new Custom_Mobile_Menu_Walker(), // Add this line
             ]);
             $phone = get_field('phone_number', 'option');
             $booking_link = get_field('booking_link', 'option');
             ?>
           </div>
 
-          <!-- ✅ CTA Buttons -->
           <div class="de-flex-col">
             <div class="menu_side_area d-flex gap-3 align-items-center">
-              <a href="<?php echo esc_attr($booking_link); ?>" class="btn-main fx-slide">
+              <a href="<?php echo esc_url($booking_link); ?>" class="btn-main fx-slide">
                 <span>Book Appointment</span>
               </a>
               <a href="tel:<?php echo esc_attr($phone); ?>" class="btn-main fx-slide btn-outline-white">
                 <span>Call: <?php echo esc_attr($phone); ?></span>
               </a>
               <div class="d-flex d-md-none mobile-cta">
-                <a href="<?php echo esc_attr($booking_link); ?>" class="btn-cta-green" aria-label="Book Appointment">
+                <a href="<?php echo esc_url($booking_link); ?>" class="btn-cta-green" aria-label="Book Appointment">
                   <i class="fs-30 id-color fa-solid fas fa-calendar-alt"></i>
                 </a>
                 <a href="tel:<?php echo esc_attr($phone); ?>" class="btn-cta-blue" aria-label="Call Us">
@@ -76,3 +73,6 @@
     document.getElementById('loader').style.display = 'none';
   });
 </script>
+<?php wp_footer(); ?>
+</body>
+</html>
