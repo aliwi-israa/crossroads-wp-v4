@@ -67,3 +67,12 @@
     </div>
   </div>
 </header>
+
+<div id="loader">
+  <div class="spinner"></div>
+</div>
+<script>
+  window.addEventListener('load', () => {
+    document.getElementById('loader').style.display = 'none';
+  });
+</script>

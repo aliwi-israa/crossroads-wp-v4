@@ -1326,6 +1326,9 @@
 }
 
 @media (max-width: 768px) {
+    .services-container {
+        width: 100%;
+    }
     .popup .row {
         flex-direction: column-reverse;
     }

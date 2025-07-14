@@ -10,7 +10,7 @@ $categories     = get_terms([
 
 if (!empty($categories)) :
 ?>
-<div class="col-md d-none d-md-block sidebar">
+<div class="col-md d-md-none d-md-block sidebar">
   <ul class="services-nav flex-column flex-nowrap d-none d-md-block">
     <?php foreach ($categories as $index => $term) :
       $slug       = $term->slug;

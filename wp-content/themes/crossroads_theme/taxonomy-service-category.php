@@ -21,7 +21,7 @@ $passed_top_level_term = $top_level_term;
         <?php get_template_part('partials/hero-archive'); ?>
         <section class="pb-0">
             <div class="container mb-4">
-              <div class="row">
+              <div class="row services-container">
                 <?php get_template_part('partials/sidebar-services'); ?>
 
                 <div class="col-md-9 main-content">
