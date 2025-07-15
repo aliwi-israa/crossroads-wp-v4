@@ -2806,6 +2806,7 @@ header.header-mobile #mainmenu li > ul > li > span.active i {
 
 #mainmenu li li a:hover, #mainmenu ul li:hover>a {
     background: unset;
+    color: var(--primary-color);
 }
 footer ul#menu-footer-menu {
   --bs-gutter-x: 1.5rem;

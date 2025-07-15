@@ -10,9 +10,9 @@ $services_description = get_field('services_description', 'option');
         <?php get_template_part('partials/hero-archive'); ?>
 
         <?php if ($services_title || $services_description): ?>
-            <section class="pb-5 intro-section">
+            <section class="pb-0 intro-section">
                 <div class="container">
-                    <div class="text-center mb-2 mb-md-3 mb-lg-4">
+                    <div class="text-center">
                     <?php if ($services_title): ?>
                         <h2><?php echo esc_html($services_title); ?></h2>
                     <?php endif; ?>
@@ -50,7 +50,7 @@ $services_description = get_field('services_description', 'option');
                 $term_desc = wp_strip_all_tags($term_desc); // Remove <p> tags and others
             ?>
 
-            <div class="col-sm-6 col-md-6 col-lg-4">
+            <div class="col-sm-6 col-md-6 col-lg-3">
                 <div class="mt-2 border-gray bg-white h-100 p-40 rounded-1 services-imgs">
 
                 <?php if ($term_icon) : ?>
