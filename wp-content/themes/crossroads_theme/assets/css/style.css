@@ -708,7 +708,7 @@ h3.subheader{color: #6fbcb2;}
 
 #mainmenu li li a:hover,
 #mainmenu ul li:hover>a {
-  color: #fff;
+  color: #fff !important;
   background: var(--primary-color);
 }
 
@@ -2777,6 +2777,35 @@ ul.checked li::before, .page-template-default main ul.wp-block-list li::before,
   list-style: none;
 
 }
+.page-template-default main ul li {
+  font-weight: normal;
+  color: var(--secondary-color);
+  position: relative;
+  display: block;
+  margin-top: 0;
+  padding: 0px;
+  padding-left: 30px;
+  border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  line-height: 1.6em;
+}
+.page-template-default main ul li:before {
+  position: absolute;
+  left: 0;
+  font-family: "FontAwesome";
+  content: "\f00c";
+  margin-right: 12px;
+  width: 20px;
+  line-height: 1;
+  padding: 4px 0;
+  font-size: 15px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 0px;
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+}
 .page-template-default main ul, ul.wp-block-list , .main-content ul:not(header ul):not(footer ul):not(.sidebar ul):not(ul.services-icon-list)  { 
   margin-left: 0;
   /* padding-left: 10px; */
@@ -2969,6 +2998,76 @@ header li.menu-item-has-children > a {
 .features-headers {
   font-size: var(--h5-font-size);
 }
+.flip-card {
+  background-color: transparent;
+  perspective: 1000px;
+  border: 1px solid #e0e0e0;
+  padding: 40px;
+  height: 100%;
+  min-height: 250px;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s; 
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  padding: inherit;
+  box-sizing: border-box;
+}
+
+.flip-card-front {
+  background-color: #fff;
+  color: black;
+}
+
+.flip-card-front img {
+    max-width: 80px;
+    height: auto;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.flip-card-front h4 {
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: center;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+.flip-card-back {
+  color: var(--secondary-color);
+  transform: rotateY(180deg);
+  padding: 20px;
+  text-align: center;
+}
+
+.flip-card-back p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);

@@ -1,17 +1,17 @@
-<?php 
-$page_link = get_sub_field('page_link');
-?>
-
 <section id="section-intro" class="text-light no-top no-bottom relative overflow-hidden">
   <div class="relative">
     <div class="swiper" id="homeSwiper">
       <div class="swiper-wrapper">
+        <?php $slide_count = 0;?>
         <?php if (have_rows('slides')) : while (have_rows('slides')) : the_row();
           $img = get_sub_field('image');
           $heading = get_sub_field('heading');
           $subheading = get_sub_field('sub_heading');
+          $page_link = get_sub_field('page_link');
         ?>
-          <?php if ($img) : ?>
+          <?php if ($img) : 
+            $slide_count++;
+            ?>
             <div class="swiper-slide">
               <div class="swiper-inner" style="background-image: url('<?php echo esc_url($img['url']); ?>');">
                 <div class="sw-overlay op-5"></div>
@@ -25,7 +25,14 @@ $page_link = get_sub_field('page_link');
                           <div class="subtitle intro"><?php echo esc_html($subheading); ?></div>
                         <?php endif; ?>
                         <?php if ($heading) : ?>
-                          <h1><?php echo esc_html($heading); ?></h1>
+                            <?php
+                            // Check if it's the first slide
+                            if ($slide_count === 1) :
+                            ?>
+                                <h1><?php echo esc_html($heading); ?></h1>
+                            <?php else : ?>
+                                <h2><?php echo esc_html($heading); ?></h2>
+                            <?php endif; ?>
                         <?php endif; ?>
                         <?php if ($page_link) : ?>
                           <a class="btn-main fx-slide menu_side_area m-0" 

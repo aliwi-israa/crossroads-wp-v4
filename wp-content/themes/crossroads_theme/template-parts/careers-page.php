@@ -38,12 +38,20 @@ $benefits_repeater    = get_field('benefits');
     <?php if ($benefits_repeater): ?>
       <?php foreach ($benefits_repeater as $item): ?>
         <div class="col-lg-4 col-md-6">
-          <div class="border-gray p-40 h-100 rounded-1">
-            <div class="relative wow fadeInUp career-icon">
-              <?php if (!empty($item['icon']['url'])): ?>
-                <img src="<?php echo esc_url($item['icon']['url']); ?>" alt="<?php echo esc_attr($item['title']); ?>">
-              <?php endif; ?>
-              <h4><?php echo esc_html($item['title']); ?></h4>
+          <div class="flip-card border-gray p-40 h-100 rounded-1">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <div class="relative wow fadeInUp career-icon">
+                  <?php if (!empty($item['icon']['url'])): ?>
+                    <img src="<?php echo esc_url($item['icon']['url']); ?>" alt="<?php echo esc_attr($item['title']); ?>">
+                  <?php endif; ?>
+                  <h4><?php echo esc_html($item['title']); ?></h4>
+                </div>
+              </div>
+              <div class="flip-card-back">
+                <p class="fw-bold mb-2"><?php echo esc_html($item['title']); ?></p>
+                <p><?php echo esc_html($item['description']); ?></p>
+              </div>
             </div>
           </div>
         </div>

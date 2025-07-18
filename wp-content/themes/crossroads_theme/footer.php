@@ -31,7 +31,9 @@
       'x'         => 'fa-solid fa-x fa-brands',
       'instagram' => 'fa-brands fa-instagram',
       'youtube'   => 'fa-brands fa-youtube',
-      'watsapp'   => 'fa-brands fa-whatsapp'
+      'watsapp'   => 'fa-brands fa-whatsapp',
+      'tiktok'    => 'fa-brands fa-tiktok',
+      'linkedin'  => 'fa-brands fa-linkedin',
     ];
     ?>
 

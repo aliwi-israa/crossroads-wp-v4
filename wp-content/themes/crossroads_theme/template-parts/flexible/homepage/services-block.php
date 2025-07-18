@@ -30,8 +30,7 @@ $button_label = get_sub_field('button_label');
             </div>
         </div>
 
-        <div class="row g-4">
-
+        <div class="row g-4 align-items-stretch">
             <?php 
             $services = get_sub_field('services'); // Post Object field (multi-select)
             if ($services) :
@@ -42,7 +41,7 @@ $button_label = get_sub_field('button_label');
                     $service_link = get_permalink($service->ID);
             ?>
                 <div class="col-lg-3 col-sm-6">
-                    <div class="hover">
+                    <div class="hover h-100">
                         <div class="bg-white h-100 p-40 rounded-1 services-imgs">
 
                             <?php if ($service_icon) : ?>
