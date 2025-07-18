@@ -1326,9 +1326,6 @@
 }
 
 @media (max-width: 768px) {
-    /* .services-container {
-        width: 100%;
-    } */
     .popup .row {
         flex-direction: column-reverse;
     }
@@ -1405,6 +1402,11 @@
     .logo-footer {
         height:unset;
     }
+}
+@media (min-width: 700px) and (max-width: 1024px) {
+  .hero-content {
+    padding-top: 60px;
+  }
 }
 
 @media only screen and (max-width: 480px) {

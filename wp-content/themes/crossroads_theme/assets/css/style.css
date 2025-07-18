@@ -3,7 +3,7 @@
   --primary-color-rgb: 74, 124, 210;
   --secondary-color: #21577F;
   --secondary-color-rgb: 59, 157, 31;
-  --button-darker-color: #58938c;
+  --button-darker-color: #4a7f7a;
 }
 
 * {
@@ -924,7 +924,7 @@ footer p {
   line-height: 1.8em;
 }
 
-footer h5, .menu-item-has-children > a
+footer h3, footer h5, .menu-item-has-children > a
  {
   color: #fff;
   font-size: 18px;
@@ -1273,6 +1273,8 @@ h5,
 
 footer h1,
 footer h2,
+footer h3,
+footer h6,
 footer h4,
 footer h4,
 footer h5 {
@@ -1280,8 +1282,10 @@ footer h5 {
 }
 
 h2.text-light,
+footer h6,
 footer h4,
 footer h4,
+footer h3,
 footer h5,
 .menu-item-has-children > a {
   color: #fff;
@@ -1877,7 +1881,7 @@ footer .widget {
   margin-bottom: 0;
 }
 
-footer .widget h5 {
+footer .widget h3, footer .widget h5 {
   margin-bottom: 20px;
 }
 
@@ -2244,6 +2248,12 @@ p {
   content: "\f106";
   color: #fff !important;
   position: relative;
+}
+.logo-footer {
+  aspect-ratio: 3 / 1 !important;
+  width: 100% !important;
+  height: auto !important;
+  object-fit: contain !important;
 }
 
 @-webkit-keyframes intro {
@@ -2946,6 +2956,18 @@ body {
 
 header li.menu-item-has-children > a {
   font-size: inherit;
+}
+.slider-contact :is(a, p), footer :is(a, p, div) {
+  color: #fff;
+}
+.bg-banner {
+  background-color: #4a9a91;
+}
+.section-dark {
+  background-color: rgb(33, 87, 127);
+}
+.features-headers {
+  font-size: var(--h5-font-size);
 }
 @keyframes spin {
   to {

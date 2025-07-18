@@ -59,7 +59,7 @@
       </div>
       <div class="col-lg-4 col-md-4 col-12 mt-4 mt-md-0">
         <div class="widget text-md-start text-center">
-          <h5>Contact Us</h5>
+          <h3>Contact Us</h3>
           <?php $map = get_field('map_link', 'option'); ?>
           <?php $address = get_field('address', 'option'); ?>
           <?php if ($map && $address): ?>
@@ -92,12 +92,12 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <div class="de-flex">
+          <div class="de-flex d-md-flex">
             <div class="de-flex-col">
-				<?php
-				$name = get_field('name', 'option');
-				echo 'Copyright ' . date('Y') . ' - ' . esc_html($name);
-				?>
+            <?php
+            $name = get_field('name', 'option');
+            echo 'Copyright ' . date('Y') . ' - ' . esc_html($name);
+            ?>
             </div>
             <ul class="menu-simple">
               <li><a href="<?php echo esc_url(get_permalink(get_page_by_path('terms-and-conditions'))); ?>">Terms &amp; Conditions</a></li>

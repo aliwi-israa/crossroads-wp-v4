@@ -4,7 +4,7 @@ $benefits_description = get_field('benefits_description');
 $benefits_repeater    = get_field('benefits');
 ?>
 
-<section class="pb-5">
+<section class="pb-3 pb-md-5">
   <div class="text-center mb-2 mb-md-3 mb-lg-4">
     <div class="h-decor"></div>
     <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
@@ -23,7 +23,7 @@ $benefits_repeater    = get_field('benefits');
   </div>
 </section>
 
-<section class="pb-5">
+<section class="pb-5 pt-2 pt-2 pt-md-5">
   <div class="text-center mb-2 mb-md-3 mb-lg-4">
     <?php if ($benefits_title): ?>
       <h2 class="wow fadeInUp"><?php echo esc_html($benefits_title); ?></h2>

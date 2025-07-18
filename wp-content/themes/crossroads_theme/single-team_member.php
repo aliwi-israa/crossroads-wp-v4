@@ -24,10 +24,10 @@ if ( has_post_thumbnail( $post->ID ) ) {
         <section>
           <div class="container mt-6">
             <div class="row  <?php echo ($image_direction === 'isImgRight') ? 'content-block-right' : 'content-block-left'; ?>">
-              <div class="col-md">
+              <div class="col-12 col-md-4">
                 <div class="rounded-1 overflow-hidden wow zoomIn image-container animated" style="background-size: cover; background-repeat: no-repeat; visibility: visible; animation-name: zoomIn;">
                   <?php if ($feat_image_url): ?>
-                    <img src="<?php echo esc_url($feat_image_url); ?>" class="img-fluid" alt="<?php echo esc_attr($display_name); ?>">
+                    <img src="<?php echo esc_url($feat_image_url); ?>" class="img-fluid rounded" alt="<?php echo esc_attr($display_name); ?>">
                   <?php endif; ?>
                 </div>
 
@@ -45,7 +45,7 @@ if ( has_post_thumbnail( $post->ID ) ) {
                 </div>
               </div>
 
-              <div class="col-lg-8 mt-4 mt-lg-0">
+              <div class="col-12 col-md-8">
                 <div class="doctor-info mb-3 mb-lg-4">
                   <div class="doctor-info-name">
                     <h3><?php echo esc_html($display_name); ?></h3>

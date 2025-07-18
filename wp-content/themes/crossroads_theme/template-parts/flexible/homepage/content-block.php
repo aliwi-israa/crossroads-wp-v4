@@ -34,7 +34,7 @@ $image_direction = get_sub_field('image_direction');
                             <?php if (have_rows('features')) : ?>
                             <?php while (have_rows('features')) : the_row(); ?>
                             <div class="col-sm-6">
-                                <h5><?php echo esc_html(get_sub_field('title')); ?></h5>
+                                <h3 class="features-headers"><?php echo esc_html(get_sub_field('title')); ?></h3>
                                 <p><?php echo esc_html(get_sub_field('description')); ?></p>
                             </div>
                             <?php endwhile; ?>
@@ -42,7 +42,7 @@ $image_direction = get_sub_field('image_direction');
 
                             <?php if ($show_rating) : ?>
                             <div class="col-sm-12">
-                                <h5>Google Rating</h5>
+                                <h3 class="features-headers">Google Rating</h3>
                                 <div class="d-flex align-items-center">
                                 <div class="fw-bold me-2"><?php echo esc_html($rating); ?></div>
                                     <div class="d-flex fs-14">

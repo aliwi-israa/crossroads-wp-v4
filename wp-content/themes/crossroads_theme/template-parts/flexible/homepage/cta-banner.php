@@ -2,7 +2,7 @@
 $heading = get_sub_field('heading');
 $page_link = get_sub_field('page_link');
 ?>
-<section class="bg-color text-light pt-40 pb-40">
+<section class="text-light pt-40 pb-40 bg-banner">
 <div class="container">
     <div class="row g-4">
     <div class="col-md-9">

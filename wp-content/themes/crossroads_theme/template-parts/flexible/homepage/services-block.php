@@ -53,7 +53,7 @@ $button_label = get_sub_field('button_label');
 
                             <div class="relative mt-4 wow fadeInUp">
                                 <?php if ($service_title) : ?>
-                                    <h4><?php echo esc_html($service_title); ?></h4>
+                                    <h3 class="features-headers"><?php echo esc_html($service_title); ?></h3>
                                 <?php endif; ?>
 
                                 <?php if ($service_desc) : ?>

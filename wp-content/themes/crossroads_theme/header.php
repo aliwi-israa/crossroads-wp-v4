@@ -4,10 +4,72 @@
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php wp_head(); ?>
+  <?php
+    // Team Member Archive Page
+    if (is_post_type_archive('team_member')) {
+      ?>
+      <title>Our Dental Team | Crossroads Dental Toronto</title>
+      <meta name="description" content="Meet the friendly and experienced dental team at Crossroads Dental in Toronto. Providing expert, patient-focused care for smiles of all ages.">
+      <!-- Open Graph (Facebook) -->
+      <meta property="og:title" content="Our Dental Team | Crossroads Dental Toronto">
+      <meta property="og:description" content="Meet the friendly and experienced dental team at Crossroads Dental in Toronto. Providing expert, patient-focused care for smiles of all ages.">
+      <meta property="og:image" content="<?php echo get_template_directory_uri(); ?>/assets/images/homepage-og.webp">
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="<?php echo get_post_type_archive_link('team_member'); ?>">
+      <!-- Twitter -->
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content="Our Dental Team | Crossroads Dental Toronto">
+      <meta name="twitter:description" content="Meet the friendly and experienced dental team at Crossroads Dental in Toronto. Providing expert, patient-focused care for smiles of all ages.">
+      <meta name="twitter:image" content="<?php echo get_template_directory_uri(); ?>/assets/images/homepage-og.webp">
+      <?php
+    }
+
+    // FAQ Archive Page
+    if (is_post_type_archive('faq')) {
+      ?>
+      <title>Dental FAQ | Crossroads Dental Toronto</title>
+      <meta name="description" content="Have questions? Find answers to the most common dental and clinic questions at Crossroads Dental in Toronto. New patients welcome.">
+      <!-- Open Graph (Facebook) -->
+      <meta property="og:title" content="Dental FAQ | Crossroads Dental Toronto">
+      <meta property="og:description" content="Have questions? Find answers to the most common dental and clinic questions at Crossroads Dental in Toronto. New patients welcome.">
+      <meta property="og:image" content="<?php echo get_template_directory_uri(); ?>/assets/images/homepage-og.webp">
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="<?php echo get_post_type_archive_link('faq'); ?>">
+      <!-- Twitter -->
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content="Dental FAQ | Crossroads Dental Toronto">
+      <meta name="twitter:description" content="Have questions? Find answers to the most common dental and clinic questions at Crossroads Dental in Toronto. New patients welcome.">
+      <meta name="twitter:image" content="<?php echo get_template_directory_uri(); ?>/assets/images/homepage-og.webp">
+      <?php
+    }
+
+    // Services Archive Page
+    if (is_post_type_archive('service') && !is_tax('service-category')) {
+        ?>
+      <title>Dental Services | Crossroads Dental Toronto</title>
+      <meta name="description" content="Explore expert dental services at Crossroads Dental in Toronto—from preventative care to cosmetic treatments. Your healthier smile starts here.">
+      <!-- Open Graph (Facebook) -->
+      <meta property="og:title" content="Dental Services | Crossroads Dental Toronto">
+      <meta property="og:description" content="Explore expert dental services at Crossroads Dental in Toronto—from preventative care to cosmetic treatments. Your healthier smile starts here.">
+      <meta property="og:image" content="<?php echo get_template_directory_uri(); ?>/assets/images/homepage-og.webp">
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="<?php echo get_post_type_archive_link('services'); ?>">
+      <!-- Twitter -->
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content="Dental Services | Crossroads Dental Toronto">
+      <meta name="twitter:description" content="Explore expert dental services at Crossroads Dental in Toronto—from preventative care to cosmetic treatments. Your healthier smile starts here.">
+      <meta name="twitter:image" content="<?php echo get_template_directory_uri(); ?>/assets/images/homepage-og.webp">
+      <?php
+    }
+    ?>
+
 </head>
 <body <?php body_class(); ?>>
 
-<a href="#" id="back-to-top"></a>
+<a href="#" id="back-to-top" aria-label="Back to Top">
+    <span class="sr-only">Back to Top</span>
+</a>
+
 <div id="de-loader"></div>
 
 <header class="transparent scroll-light">

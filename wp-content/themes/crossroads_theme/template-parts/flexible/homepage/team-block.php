@@ -65,7 +65,7 @@
 
                         ?>
                         <div class="col-lg-3 col-md-6" style="background-size: cover; background-repeat: no-repeat;">
-                            <a href="<?php echo esc_url($permalink); ?>" class="d-block text-decoration-none text-dark">
+                            <a href="<?php echo esc_url($permalink); ?>" class="d-block text-decoration-none text-dark" aria-label="<?php echo esc_html($team_member_title); ?>">
                                 <div class="relative rounded-1 overflow-hidden h-100" style="background-size: cover; background-repeat: no-repeat;">
                                     <div class="rounded-1 overflow-hidden wow fadeIn zoomIn doctors-imgs" style="background-size: cover; background-repeat: no-repeat;">
                                         <?php if (has_post_thumbnail()) : // Check if a featured image is set ?>

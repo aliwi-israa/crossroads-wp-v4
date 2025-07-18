@@ -51,7 +51,7 @@ if (is_singular()) {
 
 <?php if ($heading || $subheading): ?>
 <section id="subheader" class="bg-color-op-1 text-center">
-    <div class="container relative z-2">
+    <div class="container relative z-2 hero-content">
         <div class="row align-items-center">
             <div class="col-lg-12">
                 <?php if ($subheading): ?>

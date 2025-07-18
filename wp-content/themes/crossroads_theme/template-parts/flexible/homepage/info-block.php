@@ -20,7 +20,7 @@
                 <div class="d-flex align-items-center icons">
                     <i class="id-color fa-solid fa-clock fs-1 fs-md-2 fs-lg-3"></i>
                     <div class="ms-3 text">
-                        <h4 class="mb-0">Opening Hours</h4>
+                        <h2 class="mb-0">Opening Hours</h2>
                             <?php
                                 $office_hours = get_field('office_hours', 'option');
                                 echo '<p>'.$office_hours.'</p>';
@@ -33,7 +33,7 @@
                 <div class="d-flex align-items-center icons">
                     <i class="id-color fa fa-envelope fs-1 fs-md-2 fs-lg-3"></i>
                     <div class="ms-3 text">
-                        <h4 class="mb-0">Email Us</h4>
+                        <h2 class="mb-0">Email Us</h2>
                         <p><a href="mailto:<?php echo esc_attr($email); ?>"><?php echo esc_html($email); ?></a>
                         </p>
                     </div>
