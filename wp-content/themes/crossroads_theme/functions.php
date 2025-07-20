@@ -180,7 +180,7 @@ require get_template_directory() . '/inc/cpt.php';
  * Load CSS.
  */
 function crossroads_enqueue_styles() {
-    wp_enqueue_style('plugins-css', get_template_directory_uri() . '/assets/css/plugins.css');
+    // wp_enqueue_style('plugins-css', get_template_directory_uri() . '/assets/css/plugins.css');
     wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
 	wp_enqueue_style('swiper-css', get_template_directory_uri() . '/assets/css/swiper.css');
     wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/style.min.css');
@@ -202,15 +202,32 @@ add_action('wp_enqueue_scripts', 'crossroads_enqueue_scripts');
 /**
  * Font Awesome
  */
-function crossroads_enqueue_fontawesome() {
-  wp_enqueue_style(
-    'font-awesome',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
-    [],
-    '6.0.0'
-  );
+// function crossroads_enqueue_fontawesome() {
+//   wp_enqueue_style(
+//     'font-awesome',
+//     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
+//     [],
+//     '6.0.0'
+//   );
+// }
+// add_action('wp_enqueue_scripts', 'crossroads_enqueue_fontawesome');
+// New function to enqueue your self-hosted Font Awesome
+function crossroads_enqueue_fontawesome_self_hosted() {
+    // Path to your local Font Awesome all.min.css file
+    $fa_css_uri = get_template_directory_uri() . '/assets/fontawesome/css/all.min.css';
+    $fa_css_path = get_template_directory() . '/assets/fontawesome/css/all.min.css';
+
+    // Use filemtime for cache busting on your Font Awesome CSS
+    $version = file_exists( $fa_css_path ) ? filemtime( $fa_css_path ) : '6.0.0'; // Fallback to original version if file not found
+
+    wp_enqueue_style(
+        'font-awesome-self-hosted', // Unique handle for the self-hosted version
+        $fa_css_uri,
+        [], // No dependencies for Font Awesome itself
+        $version // Dynamic version for cache busting
+    );
 }
-add_action('wp_enqueue_scripts', 'crossroads_enqueue_fontawesome');
+add_action('wp_enqueue_scripts', 'crossroads_enqueue_fontawesome_self_hosted');
 /**
  * Config
  */
