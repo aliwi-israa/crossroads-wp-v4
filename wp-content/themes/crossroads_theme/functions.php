@@ -177,62 +177,13 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 
 require get_template_directory() . '/inc/cpt.php';
 /**
- * Enqueue Google Fonts (Urbanist and Inter) for the theme.
- */
-function crossroads_enqueue_google_fonts() {
-    // Enqueue Urbanist font
-    wp_enqueue_style(
-        'google-font-urbanist', // Unique handle for the stylesheet
-        'https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap',
-        array(), // No dependencies
-        null // Use null for version as Google Fonts handles its own versioning
-    );
-
-    // Enqueue Inter font
-    wp_enqueue_style(
-        'google-font-inter', // Unique handle for the stylesheet
-        'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap',
-        array(), // No dependencies
-        null // Use null for version
-    );
-}
-add_action( 'wp_enqueue_scripts', 'crossroads_enqueue_google_fonts' );
-/**
- * Add fonts.
- */
-function crossroads_add_editor_styles() {
-    if (is_admin()) {
-        wp_enqueue_style('google-font-urbanist-editor', 'https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap', [], null);
-        wp_enqueue_style('google-font-inter-editor', 'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap', [], null);
-    }
-}
-add_action('admin_enqueue_scripts', 'crossroads_add_editor_styles');
-
-function crossroads_enqueue_block_editor_assets() {
-    wp_enqueue_style(
-        'google-font-urbanist-editor-assets',
-        'https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap',
-        array(),
-        null
-    );
-
-    wp_enqueue_style(
-        'google-font-inter-editor-assets',
-        'https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap',
-        array(),
-        null
-    );
-}
-add_action( 'enqueue_block_editor_assets', 'crossroads_enqueue_block_editor_assets' );
-/**
  * Load CSS.
  */
 function crossroads_enqueue_styles() {
-	wp_enqueue_style('plugins-css', get_template_directory_uri() . '/assets/css/plugins.css');
-  wp_enqueue_style('critical-css', get_template_directory_uri() . '/assets/css/critical.css');
-  wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
+    wp_enqueue_style('plugins-css', get_template_directory_uri() . '/assets/css/plugins.css');
+    wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
 	wp_enqueue_style('swiper-css', get_template_directory_uri() . '/assets/css/swiper.css');
-  wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/style.min.css');
+    wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/style.min.css');
 	wp_enqueue_style('custom-mobile.css', get_template_directory_uri() . '/assets/css/style-mobile.min.css');
 
 }
@@ -242,7 +193,6 @@ add_action('wp_enqueue_scripts', 'crossroads_enqueue_styles');
  */
 function crossroads_enqueue_scripts() {
     wp_enqueue_script('jquery');
-
     wp_enqueue_script('plugins-js', get_template_directory_uri() . '/assets/js/plugins.js', ['jquery'], null, true);
 	wp_enqueue_script('designesia-js', get_template_directory_uri() . '/assets/js/designesia.min.js', ['jquery', 'plugins-js'], null, true);
     wp_enqueue_script('swiper-js', get_template_directory_uri() . '/assets/js/swiper.js', ['jquery'], null, true);

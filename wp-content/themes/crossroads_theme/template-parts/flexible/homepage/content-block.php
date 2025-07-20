@@ -32,12 +32,21 @@ $image_direction = get_sub_field('image_direction');
                         <div class="border-bottom mb-4"></div>
                         <div class="row g-4">
                             <?php if (have_rows('features')) : ?>
-                            <?php while (have_rows('features')) : the_row(); ?>
-                            <div class="col-sm-6">
-                                <h3 class="features-headers"><?php echo esc_html(get_sub_field('title')); ?></h3>
-                                <p><?php echo esc_html(get_sub_field('description')); ?></p>
-                            </div>
-                            <?php endwhile; ?>
+                                <?php while (have_rows('features')) : the_row(); ?>
+                                    <div class="col-sm-6 feature-item">
+                                        <div class="feature-content"> 
+                                            <?php
+                                            $icon = get_sub_field('icon'); // Get the icon field value
+                                            if ($icon) : ?>
+                                                <div class="services-icons" style="gap:10px">
+                                                    <img style= "width:40px !important"class= "w-100 wow scaleIn animated mb-3"src="<?php echo esc_url($icon['url']); ?>" alt="<?php echo esc_attr($icon['alt']); ?>" />
+                                                    <h3 class="features-headers"><?php echo esc_html(get_sub_field('title')); ?></h3>
+                                                </div>
+                                            <?php endif; ?>
+                                            <p><?php echo esc_html(get_sub_field('description')); ?></p>
+                                        </div>
+                                    </div>
+                                <?php endwhile; ?>
                             <?php endif; ?>
 
                             <?php if ($show_rating) : ?>
