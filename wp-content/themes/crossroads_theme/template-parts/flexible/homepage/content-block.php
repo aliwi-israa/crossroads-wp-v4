@@ -17,7 +17,8 @@ $image_direction = get_sub_field('image_direction');
                 <div class="img-container rounded-1 overflow-hidden wow zoomIn">
                     <?php if ($image) : ?>
                     <img src="<?php echo esc_url($image['url']); ?>"
-                        alt="<?php echo esc_attr($image['alt']); ?>">
+                        alt="<?php echo esc_attr($image['alt']); ?>"
+                        loading="lazy">
                     <?php endif; ?>
                 </div>
             </div>
@@ -39,7 +40,7 @@ $image_direction = get_sub_field('image_direction');
                                             $icon = get_sub_field('icon'); // Get the icon field value
                                             if ($icon) : ?>
                                                 <div class="services-icons" style="gap:10px">
-                                                    <img style= "width:40px !important"class= "w-100 wow scaleIn animated mb-3"src="<?php echo esc_url($icon['url']); ?>" alt="<?php echo esc_attr($icon['alt']); ?>" />
+                                                    <img style= "width:40px !important"class= "w-100 wow scaleIn animated mb-3"src="<?php echo esc_url($icon['url']); ?>" alt="<?php echo esc_attr($icon['alt']); ?>" loading="lazy" />
                                                     <h3 class="features-headers"><?php echo esc_html(get_sub_field('title')); ?></h3>
                                                 </div>
                                             <?php endif; ?>

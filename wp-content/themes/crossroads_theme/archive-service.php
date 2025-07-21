@@ -49,46 +49,56 @@ $services_description = get_field('services_description', 'option');
                 $term_desc = term_description($term->term_id, 'service-category');
                 $term_desc = wp_strip_all_tags($term_desc); // Remove <p> tags and others
             ?>
+            <div class="col-sm-6 col-md-6 col-lg-3 mb-4">
+                <div class="mt-2 border-gray bg-white h-100 p-4 rounded-1 d-flex flex-column"> <!-- Use Bootstrap padding -->
 
-            <div class="col-sm-6 col-md-6 col-lg-3">
-                <div class="mt-2 border-gray bg-white h-100 p-40 rounded-1 services-imgs">
-
-                <?php if ($term_icon) : ?>
-                    <div class="mb-4">
-                    <a href="<?php echo esc_url($term_link); ?>">
-                        <img class="box-icon" src="<?php echo esc_url($term_icon['url']); ?>" alt="<?php echo esc_attr($term->name); ?>" width="70" height="79">
-                    </a>
-                    </div>
-                <?php endif; ?>
-
-                <h4 class="wow fadeInUp" data-wow-delay=".2s">
-                    <a class="text-blue" href="<?php echo esc_url($term_link); ?>"><?php echo esc_html($term->name); ?></a>
-                </h4>
-
-                <div class="mb-4">
-                    <?php echo esc_html($term_desc); ?>
-
-                    <?php
-                    $child_terms = get_terms([
-                    'taxonomy'   => 'service-category',
-                    'parent'     => $term->term_id,
-                    'hide_empty' => false,
-                    ]);
-
-                    if (!empty($child_terms)) :
-                    ?>
-                    <ul class="ul-check fw-500 mt-3 wow fadeInUp">
-                        <?php foreach ($child_terms as $child) : ?>
-                        <li><a href="<?php echo esc_url(get_term_link($child)); ?>"><?php echo esc_html($child->name); ?></a></li>
-                        <?php endforeach; ?>
-                    </ul>
+                    <?php if ($term_icon) : ?>
+                        <div class="mb-4">
+                            <a href="<?php echo esc_url($term_link); ?>">
+                                <img class="box-icon" src="<?php echo esc_url($term_icon['url']); ?>"
+                                    alt="<?php echo esc_attr($term->name); ?>" width="70" height="79">
+                            </a>
+                        </div>
                     <?php endif; ?>
-                </div>
 
-                <a class="btn-plus" href="<?php echo esc_url($term_link); ?>">
-                    <i class="fa fa-plus"></i>
-                    <span>Read more</span>
-                </a>
+                    <h4 class="wow fadeInUp mb-2" data-wow-delay=".2s">
+                        <a class="text-blue" href="<?php echo esc_url($term_link); ?>">
+                            <?php echo esc_html($term->name); ?>
+                        </a>
+                    </h4>
+
+                    <!-- Content block that grows to push button down -->
+                    <div class="flex-grow-1 d-flex flex-column text-break text-wrap">
+                        <?php if (!empty($term_desc)) : ?>
+                            <div class="mb-3"><?php echo esc_html($term_desc); ?></div>
+                        <?php endif; ?>
+
+                        <?php
+                        $child_terms = get_terms([
+                            'taxonomy'   => 'service-category',
+                            'parent'     => $term->term_id,
+                            'hide_empty' => false,
+                        ]);
+
+                        if (!empty($child_terms)) :
+                        ?>
+                            <ul class="ul-check fw-500 mt-2 wow fadeInUp">
+                                <?php foreach ($child_terms as $child) : ?>
+                                    <li>
+                                        <a href="<?php echo esc_url(get_term_link($child)); ?>">
+                                            <?php echo esc_html($child->name); ?>
+                                        </a>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+                    </div>
+
+                    <!-- Button pushed to the bottom -->
+                    <a class="btn-plus mt-auto text-blue" href="<?php echo esc_url($term_link); ?>">
+                        <i class="fa fa-plus"></i>
+                        <span>Read more</span>
+                    </a>
                 </div>
             </div>
 

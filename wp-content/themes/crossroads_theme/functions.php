@@ -246,18 +246,6 @@ function crossroads_enqueue_scripts() {
     wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/custom.min.js', ['jquery', 'designesia-js'], null, true);
 }
 add_action('wp_enqueue_scripts', 'crossroads_enqueue_scripts');
-/**
- * Font Awesome
- */
-// function crossroads_enqueue_fontawesome() {
-//   wp_enqueue_style(
-//     'font-awesome',
-//     'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
-//     [],
-//     '6.0.0'
-//   );
-// }
-// add_action('wp_enqueue_scripts', 'crossroads_enqueue_fontawesome');
 // New function to enqueue your self-hosted Font Awesome
 function crossroads_enqueue_fontawesome_self_hosted() {
     // Path to your local Font Awesome all.min.css file

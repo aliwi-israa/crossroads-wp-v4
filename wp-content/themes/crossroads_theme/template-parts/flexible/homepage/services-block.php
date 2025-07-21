@@ -40,37 +40,41 @@ $button_label = get_sub_field('button_label');
                     $service_icon = get_field('service_icon', $service->ID); // Assuming this is an image field
                     $service_link = get_permalink($service->ID);
             ?>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="hover h-100">
-                        <div class="bg-white h-100 p-40 rounded-1 services-imgs">
+            <div class="col-lg-3 col-sm-6 mb-4"> <!-- Add bottom margin to prevent overlap -->
+                <div class="hover h-100">
+                    <div class="bg-white h-100 p-4 rounded-1 d-flex flex-column"> <!-- Use p-4 instead of custom p-40 -->
 
-                            <?php if ($service_icon) : ?>
-                                <img src="<?php echo esc_url($service_icon['url']); ?>" class="w-70px mb-3 wow scaleIn"
-                                    alt="<?php echo esc_attr($service_title); ?>" width="70" height="70"
-                                    style="height: auto;">
+                        <?php if ($service_icon) : ?>
+                            <img src="<?php echo esc_url($service_icon['url']); ?>"
+                                class="mb-3 wow scaleIn"
+                                loading="lazy"
+                                alt="<?php echo esc_attr($service_title); ?>"
+                                width="70" height="70" style="height: auto;">
+                        <?php endif; ?>
+
+                        <!-- Content block that grows -->
+                        <div class="mt-2 wow fadeInUp flex-grow-1 d-flex flex-column">
+                            <?php if ($service_title) : ?>
+                                <h3 class="features-headers mb-2"><?php echo esc_html($service_title); ?></h3>
                             <?php endif; ?>
 
-                            <div class="relative mt-4 wow fadeInUp">
-                                <?php if ($service_title) : ?>
-                                    <h3 class="features-headers"><?php echo esc_html($service_title); ?></h3>
-                                <?php endif; ?>
-
-                                <?php if ($service_desc) : ?>
-                                    <p><?php echo esc_html($service_desc); ?></p>
-                                <?php endif; ?>
-
-                                <?php if ($service_link) : ?>
-                                    <a class="btn-plus text-blue" href="<?php echo esc_url($service_link); ?>">
-                                        <i class="fa fa-plus"></i>
-                                        <span>Read More</span>
-                                        <span><?php echo esc_html($button_label); ?></span>
-                                    </a>
-                                <?php endif; ?>
-                            </div>
-
+                            <?php if ($service_desc) : ?>
+                                <p class="mb-4 text-break text-wrap"><?php echo esc_html($service_desc); ?></p>
+                            <?php endif; ?>
                         </div>
+
+                        <!-- Button pushed to bottom -->
+                        <?php if ($service_link) : ?>
+                            <a class="btn-plus text-blue mt-auto" href="<?php echo esc_url($service_link); ?>">
+                                <i class="fa fa-plus"></i>
+                                <span>Read More</span>
+                                <span><?php echo esc_html($button_label); ?></span>
+                            </a>
+                        <?php endif; ?>
+
                     </div>
                 </div>
+            </div>
             <?php 
                 endforeach;
             endif;
