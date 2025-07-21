@@ -3083,6 +3083,17 @@ header li.menu-item-has-children > a {
   justify-content: center;
 }
 
+#section-intro .swiper-inner img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.subtitle.intro {
+  font-size:44px; 
+}
+.hero-heading {
+  font-size:34px; 
+}
 @keyframes spin {
   to {
     transform: rotate(360deg);

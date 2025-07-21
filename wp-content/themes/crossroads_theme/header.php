@@ -88,9 +88,9 @@
             <div class="de-flex-col">
               <div id="logo">
                 <a href="<?php echo home_url(); ?>">
-                  <img class="logo-main" src="<?php echo get_template_directory_uri(); ?>/assets/images/crosroads-dental-clinic-logo-white.webp" alt="Logo" width="595" height="170">
-                  <img class="logo-scroll" src="<?php echo get_template_directory_uri(); ?>/assets/images/crosroads-dental-clinic-logo.webp" alt="Logo Scroll" width="480" height="138">
-                  <img class="logo-mobile" src="<?php echo get_template_directory_uri(); ?>/assets/images/crosroads-dental-clinic-logo-white.webp" alt="Logo Mobile" width="595" height="170">
+                  <img class="logo-main" src="<?php echo get_template_directory_uri(); ?>/assets/images/crosroads-dental-clinic-logo-white.webp" alt="Logo" width="265" height="76">
+                  <img class="logo-scroll" src="<?php echo get_template_directory_uri(); ?>/assets/images/crosroads-dental-clinic-logo.webp" alt="Logo Scroll" width="265" height="76">
+                  <img class="logo-mobile" src="<?php echo get_template_directory_uri(); ?>/assets/images/crosroads-dental-clinic-logo-white.webp" alt="Logo Mobile" width="265" height="76">
                 </a>
               </div>
             </div>

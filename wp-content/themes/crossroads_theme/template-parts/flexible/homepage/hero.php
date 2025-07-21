@@ -13,7 +13,14 @@
             $slide_count++;
             ?>
             <div class="swiper-slide">
-              <div class="swiper-inner" style="background-image: url('<?php echo esc_url($img['url']); ?>');">
+              <div class="swiper-inner">
+                <img src="<?php echo esc_url($img['url']); ?>"
+                  alt="<?php echo esc_html($subheading); ?>"
+                  fetchpriority="high"
+                  decoding="async"
+                  width="1920"
+                  height="1080"
+                />
                 <div class="sw-overlay op-5"></div>
                 <div class="gradient-edge-left z-2"></div>
                 <div class="abs abs-centered w-100 z-2">
@@ -29,9 +36,9 @@
                             // Check if it's the first slide
                             if ($slide_count === 1) :
                             ?>
-                                <h1><?php echo esc_html($heading); ?></h1>
+                                <h1 class="hero-heading"><?php echo esc_html($heading); ?></h1>
                             <?php else : ?>
-                                <h2><?php echo esc_html($heading); ?></h2>
+                                <h2 class="hero-heading"><?php echo esc_html($heading); ?></h2>
                             <?php endif; ?>
                         <?php endif; ?>
                         <?php if ($page_link) : ?>
