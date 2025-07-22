@@ -14,13 +14,23 @@
             ?>
             <div class="swiper-slide">
               <div class="swiper-inner">
-                <img src="<?php echo esc_url($img['url']); ?>"
-                  alt="<?php echo esc_html($subheading); ?>"
-                  fetchpriority="high"
-                  decoding="async"
-                  width="1920"
-                  height="1080"
-                />
+              <?php
+              $image_id = $img['id']; // assuming you have the attachment ID
+              $image_srcset = wp_get_attachment_image_srcset( $image_id, 'full' );
+              $image_sizes  = wp_get_attachment_image_sizes( $image_id, 'full' );
+              ?>
+              <img 
+                src="<?php echo esc_url($img['url']); ?>"
+                srcset="<?php echo esc_attr($image_srcset); ?>"
+                sizes="<?php echo esc_attr($image_sizes); ?>"
+                alt="<?php echo esc_html($subheading); ?>"
+                fetchpriority="high"
+                decoding="async"
+                width="1280"
+                height="853"
+                loading="eager"
+              />
+                
                 <div class="sw-overlay op-5"></div>
                 <div class="gradient-edge-left z-2"></div>
                 <div class="abs abs-centered w-100 z-2">

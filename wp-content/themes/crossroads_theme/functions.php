@@ -176,6 +176,13 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 }
 
 require get_template_directory() . '/inc/cpt.php';
+
+add_action( 'wp_enqueue_scripts', 'remove_dashicons', 100 );
+function remove_dashicons() {
+    if ( ! is_user_logged_in() ) {
+        wp_deregister_style( 'dashicons' );
+    }
+}
 /**
  * Enqueue Google Fonts (Urbanist and Inter) for the theme.
  */
@@ -246,6 +253,17 @@ function crossroads_enqueue_scripts() {
     wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/custom.min.js', ['jquery', 'designesia-js'], null, true);
 }
 add_action('wp_enqueue_scripts', 'crossroads_enqueue_scripts');
+/**
+ * make JQuery in body.
+ */
+// add_action('wp_enqueue_scripts', function() {
+//   if (!is_admin()) {
+//     wp_deregister_script('jquery');
+//     wp_register_script('jquery', includes_url('/js/jquery/jquery.min.js'), [], null, true);
+//     wp_enqueue_script('jquery');
+//   }
+// }, 0);
+
 // New function to enqueue your self-hosted Font Awesome
 function crossroads_enqueue_fontawesome_self_hosted() {
     // Path to your local Font Awesome all.min.css file

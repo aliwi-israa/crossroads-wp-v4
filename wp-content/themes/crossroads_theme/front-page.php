@@ -1,57 +1,5 @@
 <?php get_header(); ?>
 <?php $home_id = get_option('page_on_front'); ?>
-
-<style>
-  .slider-contact .text h2 {
-    font-size: 20px;
-  }
-
-  .swiper-inner {
-    aspect-ratio: 16 / 9;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  .img-container {
-    aspect-ratio: 4 / 3;
-    overflow: hidden;
-  }
-  .img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .swiper {
-    width: 100%;
-    height: 100vh;
-    max-height: 900px;
-    min-height: 800px;
-    position: relative;
-    overflow: hidden;
-  }
-  .swiper-wrapper {
-    display: flex;
-    transition-property: transform;
-    box-sizing: content-box;
-  }
-  .swiper-slide {
-    flex-shrink: 0;
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
-  @media (max-width: 1024px) {
-    .swiper { height: 800px; }
-  }
-  @media (max-width: 768px) {
-    .swiper { height: 800px; }
-  }
-  @media (max-width: 480px) {
-    .swiper { height: 40vh; }
-  }
-</style>
-
 <div id="wrapper">
   <div class="no-bottom no-top" id="content">
     <div id="top"></div>

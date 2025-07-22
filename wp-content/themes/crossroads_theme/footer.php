@@ -112,8 +112,11 @@
   </div>
 </footer>
 
-
 <?php wp_footer(); ?>
-
+  <script>
+  window.addEventListener('load', () => {
+    document.getElementById('loader').style.display = 'none';
+  });
+</script>
 </body>
 </html>

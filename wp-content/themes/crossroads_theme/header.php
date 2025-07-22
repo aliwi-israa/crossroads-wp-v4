@@ -9,6 +9,7 @@
 
   <meta charset="<?php bloginfo('charset'); ?>">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="preload" as="image" href="<?php echo get_template_directory_uri(); ?>/assets/images/crosroads-dental-clinic-logo-white.webp" fetchpriority="high"> -->
   <?php wp_head(); ?>
   <?php
     // Team Member Archive Page
@@ -68,7 +69,56 @@
       <?php
     }
     ?>
+  <style>
+  .slider-contact .text h2 {
+    font-size: 20px;
+  }
 
+  .swiper-inner {
+    aspect-ratio: 16 / 9;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  .img-container {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+  .img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .swiper {
+    width: 100%;
+    height: 100vh;
+    max-height: 900px;
+    min-height: 800px;
+    position: relative;
+    overflow: hidden;
+  }
+  .swiper-wrapper {
+    display: flex;
+    transition-property: transform;
+    box-sizing: content-box;
+  }
+  .swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  @media (max-width: 1024px) {
+    .swiper { height: 800px; }
+  }
+  @media (max-width: 768px) {
+    .swiper { height: 800px; }
+  }
+  @media (max-width: 480px) {
+    .swiper { height: 40vh; }
+  }
+</style>
 </head>
 <body <?php body_class(); ?>>
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRGCBRB8"
@@ -88,7 +138,7 @@
             <div class="de-flex-col">
               <div id="logo">
                 <a href="<?php echo home_url(); ?>">
-                  <img class="logo-main" src="<?php echo get_template_directory_uri(); ?>/assets/images/crosroads-dental-clinic-logo-white.webp" alt="Logo" width="265" height="76">
+                  <img class="logo-main" src="<?php echo get_template_directory_uri(); ?>/assets/images/crosroads-dental-clinic-logo-white.webp" alt="Logo" width="265" height="76" fetchpriority="high" loading="eager">
                   <img class="logo-scroll" src="<?php echo get_template_directory_uri(); ?>/assets/images/crosroads-dental-clinic-logo.webp" alt="Logo Scroll" width="265" height="76">
                   <img class="logo-mobile" src="<?php echo get_template_directory_uri(); ?>/assets/images/crosroads-dental-clinic-logo-white.webp" alt="Logo Mobile" width="265" height="76">
                 </a>
@@ -137,11 +187,3 @@
   <div id="loader">
     <div class="spinner"></div>
   </div>
-  <script>
-    window.addEventListener('load', () => {
-      document.getElementById('loader').style.display = 'none';
-    });
-  </script>
-  <?php wp_footer(); ?>
-</body>
-</html>
