@@ -102,7 +102,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     new Swiper('#homeSwiper', {
       loop: false,
-      autoplay: { delay: 3000 },
+      autoplay: { delay: 5000 },
       slidesPerView: 1,
       effect: 'slide',
       pagination: { el: '.swiper-pagination', clickable: true }

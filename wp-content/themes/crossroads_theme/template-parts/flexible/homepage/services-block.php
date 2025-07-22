@@ -5,10 +5,9 @@ $description = get_sub_field('description');
 $is_external_link = get_sub_field('is_external_link');
 $page_link = get_sub_field('page_link');
 $external_link = get_sub_field('external_link');
-$button_label = get_sub_field('button_label');
 ?>
 
-<section class="bg-color-op-1">
+<section class="bg-color-op-1 services-block">
     <div class="container">
         <div class="row g-4 justify-content-center">
             <div class="col-lg-8 text-center">
@@ -65,10 +64,10 @@ $button_label = get_sub_field('button_label');
 
                         <!-- Button pushed to bottom -->
                         <?php if ($service_link) : ?>
-                            <a class="btn-plus text-blue mt-auto" href="<?php echo esc_url($service_link); ?>">
+                            <a class="btn-plus text-blue mt-auto" href="<?php echo esc_url($service_link); ?>"
+                                aria-label="Read more about <?php echo esc_html($service_title); ?>">
                                 <i class="fa fa-plus"></i>
-                                <span>Read More</span>
-                                <span><?php echo esc_html($button_label); ?></span>
+                                <span>Read More <span class="sr-only"> read more about<?php echo esc_html($service_title); ?></span></span>
                             </a>
                         <?php endif; ?>
 
@@ -79,20 +78,6 @@ $button_label = get_sub_field('button_label');
                 endforeach;
             endif;
             ?>
-
-            <div class="col-lg-12 mt-5 text-center">
-                <?php if ($is_external_link && $external_link) : ?>
-                    <a class="btn-secondary fx-slide" href="<?php echo esc_url($external_link); ?>"
-                        target="_blank" rel="noopener noreferrer">
-                        <span><?php echo esc_html($button_label); ?></span>
-                    </a>
-                <?php elseif (!$is_external_link && $page_link) : ?>
-                    <a class="btn-secondary fx-slide" href="<?php echo esc_url(get_permalink($page_link)); ?>">
-                        <span><?php echo esc_html($button_label); ?></span>
-                    </a>
-                <?php endif; ?>
-            </div>
-
         </div>
     </div>
 </section>
