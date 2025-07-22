@@ -234,14 +234,43 @@ add_action( 'enqueue_block_editor_assets', 'crossroads_enqueue_block_editor_asse
 /**
  * Load CSS.
  */
-function crossroads_enqueue_styles() {
-    wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
-	wp_enqueue_style('swiper-css', get_template_directory_uri() . '/assets/css/swiper.css');
-    wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/style.min.css');
-	wp_enqueue_style('custom-mobile.css', get_template_directory_uri() . '/assets/css/style-mobile.min.css');
+// function crossroads_enqueue_styles() {
+//     wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
+// 	wp_enqueue_style('swiper-css', get_template_directory_uri() . '/assets/css/swiper.css');
+//     wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/style.min.css');
+// 	wp_enqueue_style('custom-mobile.css', get_template_directory_uri() . '/assets/css/style-mobile.min.css');
 
+// }
+// add_action('wp_enqueue_scripts', 'crossroads_enqueue_styles');
+function crossroads_async_styles() {
+    // Enqueue your main stylesheets normally.
+    // WordPress will print them as <link rel="stylesheet">
+    wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
+    wp_enqueue_style('swiper-css', get_template_directory_uri() . '/assets/css/swiper.css');
+    wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/style.min.css');
+    wp_enqueue_style('custom-mobile.css', get_template_directory_uri() . '/assets/css/style-mobile.min.css');
 }
-add_action('wp_enqueue_scripts', 'crossroads_enqueue_styles');
+add_action('wp_enqueue_scripts', 'crossroads_async_styles'); // Use wp_enqueue_scripts for styles too
+
+// Filter to modify the CSS link tags for asynchronous loading
+function crossroads_add_async_attribute($tag, $handle, $href, $media) {
+    $async_handles = array(
+        'bootstrap-css',
+        'swiper-css',
+        'custom-css',
+        'custom-mobile.css'
+    );
+
+    if ( in_array( $handle, $async_handles ) ) {
+        // Use media="print" to trick browsers into downloading non-render-blocking,
+        // then change to "all" with JS. Also use onload="this.media='all'" for modern browsers.
+        return '<link rel="stylesheet" id="' . $handle . '" href="' . $href . '" media="print" onload="this.media=\'all\'">' . "\n" .
+               '<noscript><link rel="stylesheet" id="' . $handle . '-noscript" href="' . $href . '" media="all"></noscript>' . "\n";
+    }
+    return $tag;
+}
+// Only apply this if you are NOT using a plugin that already handles critical CSS/async loading
+// add_filter('style_loader_tag', 'crossroads_add_async_attribute', 10, 4);
 /**
  * Load JS.
  */
