@@ -16,20 +16,23 @@
               <div class="swiper-inner">
               <?php
               $image_id = $img['id']; // assuming you have the attachment ID
-              $image_srcset = wp_get_attachment_image_srcset( $image_id, 'full' );
-              $image_sizes  = wp_get_attachment_image_sizes( $image_id, 'full' );
+              // $image_srcset = wp_get_attachment_image_srcset( $image_id, 'full' );
+              $image_srcset = wp_get_attachment_image_srcset( $image_id, 'slider-optimized' );
+
+              $sizes = '(max-width: 480px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 1280px';
               ?>
               <img 
                 src="<?php echo esc_url($img['url']); ?>"
                 srcset="<?php echo esc_attr($image_srcset); ?>"
-                sizes="<?php echo esc_attr($image_sizes); ?>"
+                sizes="<?php echo esc_attr($sizes); ?>"
                 alt="<?php echo esc_html($subheading); ?>"
                 fetchpriority="high"
                 decoding="async"
                 width="1280"
                 height="853"
-                loading="eager"
+                loading="<?php echo $slide_count === 1 ? 'eager' : 'lazy'; ?>"
               />
+
                 
                 <div class="sw-overlay op-5"></div>
                 <div class="gradient-edge-left z-2"></div>

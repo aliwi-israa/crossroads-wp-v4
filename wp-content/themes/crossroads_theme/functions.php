@@ -274,6 +274,14 @@ function crossroads_add_async_attribute($tag, $handle, $href, $media) {
 /**
  * Load JS.
  */
+// function crossroads_enqueue_scripts() {
+//     wp_enqueue_script('jquery');
+//     wp_enqueue_script('plugins-js', get_template_directory_uri() . '/assets/js/plugins.js', ['jquery'], null, true);
+// 	wp_enqueue_script('designesia-js', get_template_directory_uri() . '/assets/js/designesia.min.js', ['jquery', 'plugins-js'], null, true);
+//     wp_enqueue_script('swiper-js', get_template_directory_uri() . '/assets/js/swiper.js', ['jquery'], null, true);
+//     wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/custom.min.js', ['jquery', 'designesia-js'], null, true);
+// }
+// add_action('wp_enqueue_scripts', 'crossroads_enqueue_scripts');
 function crossroads_enqueue_scripts() {
     wp_enqueue_script('jquery');
     wp_enqueue_script('plugins-js', get_template_directory_uri() . '/assets/js/plugins.js', ['jquery'], null, true);
@@ -282,6 +290,27 @@ function crossroads_enqueue_scripts() {
     wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/custom.min.js', ['jquery', 'designesia-js'], null, true);
 }
 add_action('wp_enqueue_scripts', 'crossroads_enqueue_scripts');
+
+function crossroads_add_defer_attribute($tag, $handle, $src) {
+    // Define an array of script handles that you want to defer
+    // These handles are the first argument you pass to wp_enqueue_script()
+    $defer_handles = array(
+        'plugins-js',     // Your assets/js/plugins.js
+        'designesia-js',  // Your assets/js/designesia.min.js
+        'swiper-js',      // Your assets/js/swiper.js
+        'custom-js'       // Your assets/js/custom.min.js
+    );
+
+    // Check if the current script handle is in our defer list
+    if ( in_array( $handle, $defer_handles ) ) {
+        // Add the 'defer' attribute to the script tag
+        return '<script src="' . $src . '" defer></script>' . "\n";
+    }
+
+    return $tag; // Return the original tag if not in the defer list
+}
+add_filter('script_loader_tag', 'crossroads_add_defer_attribute', 10, 3);
+
 /**
  * make JQuery in body.
  */
@@ -484,23 +513,7 @@ function add_custom_body_class($classes) {
   return $classes;
 }
 add_filter('body_class', 'add_custom_body_class');
-/**
- * listener to change slug when a post name is changed
- */
-add_action('save_post', function ($post_id) {
-    if (get_post_type($post_id) !== 'team') return;
 
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
-    $post = get_post($post_id);
-    $current_slug = $post->post_name;
-    $new_slug = sanitize_title($post->post_title);
-    if ($current_slug !== $new_slug && !isset($_POST['post_name'])) {
-        wp_update_post([
-            'ID' => $post_id,
-            'post_name' => $new_slug,
-        ]);
-    }
-});
 /**
  * patterns
  */
@@ -521,17 +534,5 @@ add_action('init', function () {
     require get_template_directory() . '/patterns/why-choose-us.php'
   );
 });
-/**
- * remove default padding in patterns
- */
-function enqueue_pattern_padding_remover_script() {
-    wp_enqueue_script(
-        'pattern-padding-remover',
-        get_template_directory_uri() . '/assets/js/pattern-padding-remover.js',
-        array('jquery'),
-        filemtime(get_template_directory() . '/assets/js/pattern-padding-remover.js'), // Cache busting
-        true // Load in the footer
-    );
-}
-add_action('wp_enqueue_scripts', 'enqueue_pattern_padding_remover_script');
 
+add_image_size( 'slider-optimized', 768, 512, true ); // or adjust to match your layout
