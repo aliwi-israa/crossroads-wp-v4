@@ -4,6 +4,7 @@
     <div class="no-bottom no-top" id="content">
         <div id="top"></div>
         <?php get_template_part('partials/hero-archive'); ?>
+        <?php get_template_part('partials/breadcrumb');?>
         <section>
             <div class="container team-block">
                 <div class="row">

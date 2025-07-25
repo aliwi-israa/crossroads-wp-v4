@@ -14,7 +14,7 @@ if (is_singular()) {
     if (is_singular('service')) {
         $subheading = 'Services'; // Hardcoded for single service pages
     } else if (is_singular('faq')) {
-        $subheading = get_field('faq_subheading');
+        $subheading = 'FAQs';
     } else {
         $subheading = get_field('hero_subheading');
     }

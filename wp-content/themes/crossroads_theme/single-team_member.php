@@ -21,6 +21,7 @@ if ( has_post_thumbnail( $post->ID ) ) {
     <div id="top"></div>
     <div class="entry-content">
         <?php get_template_part('partials/hero-archive'); ?>
+        <?php get_template_part('partials/breadcrumb');?>
         <section>
           <div class="container mt-6">
             <div class="row  <?php echo ($image_direction === 'isImgRight') ? 'content-block-right' : 'content-block-left'; ?>">

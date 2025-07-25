@@ -12,7 +12,7 @@
   <div class="no-bottom no-top" id="content">
       <div id="top"></div>
       <?php get_template_part('partials/hero-archive'); ?>
-       <!-- get_template_part('partials/breadcrumbs');  -->
+        <?php get_template_part('partials/breadcrumb');?>
       <?php if (have_rows('flexible_content_subpage')): ?>
         <?php while (have_rows('flexible_content_subpage')): the_row(); ?>
           <?php

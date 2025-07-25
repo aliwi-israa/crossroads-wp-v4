@@ -536,3 +536,35 @@ add_action('init', function () {
 });
 
 add_image_size( 'slider-optimized', 768, 512, true ); // or adjust to match your layout
+
+add_filter('wpseo_breadcrumb_links', function($links) {
+    foreach ($links as $key => $link) {
+        // Look for the taxonomy parent labeled "Services"
+        if ($link['text'] === 'Services') {
+            $links[$key]['url'] = home_url('/services/');
+        }
+    }
+    return $links;
+});
+
+add_filter('wpseo_breadcrumb_links', function($links) {
+    global $post;
+
+    // Only run on single service pages
+    if (is_singular('service')) {
+        $terms = get_the_terms($post->ID, 'service-category');
+        if (!empty($terms) && !is_wp_error($terms)) {
+            // Use the first term (or loop through if needed)
+            $term = $terms[0];
+            $term_link = get_term_link($term);
+
+            // Insert taxonomy term before the post title
+            array_splice($links, -1, 0, [[
+                'url' => $term_link,
+                'text' => $term->name,
+            ]]);
+        }
+    }
+
+    return $links;
+});

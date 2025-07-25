@@ -3,6 +3,7 @@
     <div class="no-bottom no-top" id="content">
         <div id="top"></div>
         <?php get_template_part('partials/hero-archive'); ?>
+        <?php get_template_part('partials/breadcrumb');?>
 <section>
   <div class="container mb-4">
     <input type="text" id="faqSearch" class="form-control" placeholder="Search for a service">
@@ -68,7 +69,9 @@
                 $faq_id = 'faq-' . sanitize_title_with_dashes($service->post_name) . '-' . get_the_ID();
               ?>
               <div class="accordion-section-title" data-tab="#<?php echo esc_attr($faq_id); ?>">
-                <?php the_title(); ?>
+                <a href="<?php the_permalink(); ?>" class="faq-accordion-link">
+                  <?php the_title(); ?>
+                </a>
               </div>
               <div class="accordion-section-content" id="<?php echo esc_attr($faq_id); ?>">
                 <?php the_content(); ?>

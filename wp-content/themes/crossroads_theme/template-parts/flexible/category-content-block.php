@@ -64,11 +64,15 @@
                   <strong><?php echo esc_html($service_title);?></strong>
                   </div><br><?php echo esc_html($service_desc);
                   ?>
-            </a></li><?php endwhile;
-            ?>
-            </ul>
-          <?php endif;
-        wp_reset_postdata();
-        ?>
-    </div>
-  </section>
+            </a></li>
+        <?php endwhile;?>
+      </ul>
+      <?php endif;
+      wp_reset_postdata();
+      $footer_block = get_sub_field('footer_block');
+      if ( ! empty( $footer_block ) ) {
+          echo wp_kses_post( $footer_block );
+      }
+      ?>
+  </div>
+</section>

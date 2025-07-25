@@ -19,6 +19,7 @@ $passed_top_level_term = $top_level_term;
     <div class="no-bottom no-top" id="content">
         <div id="top"></div>
         <?php get_template_part('partials/hero-archive'); ?>
+        <?php get_template_part('partials/breadcrumb');?>
         <section class="pb-0">
             <div class="container mb-4">
               <div class="row services-container">
