@@ -989,7 +989,11 @@ footer a, footer a:visited {
   margin: 0 10px 0 10px;
   color: var(--primary-color);
 }
-
+.fa-chevron-right:before {
+  font-size: 10px;
+  margin: 0 10px 0 10px;
+  color: var(--primary-color);
+}
 .crumb li:last-child:after {
   display: none;
 }

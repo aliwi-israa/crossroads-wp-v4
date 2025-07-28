@@ -62,12 +62,10 @@ $external_link = get_sub_field('external_link');
                             <?php endif; ?>
                         </div>
 
-                        <!-- Button pushed to bottom -->
                         <?php if ($service_link) : ?>
-                            <a class="btn-plus text-blue mt-auto" href="<?php echo esc_url($service_link); ?>"
-                                aria-label="Read more about <?php echo esc_html($service_title); ?>">
-                                <i class="fa fa-plus"></i>
-                                <span>Read More <span class="sr-only"> read more about<?php echo esc_html($service_title); ?></span></span>
+                            <a class="btn-plus text-blue mt-auto" href="<?php echo esc_url($service_link); ?>">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                                <span>Read More <span class="sr-only"> about <?php echo esc_html($service_title); ?></span></span>
                             </a>
                         <?php endif; ?>
 

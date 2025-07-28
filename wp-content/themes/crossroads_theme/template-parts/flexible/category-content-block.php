@@ -1,6 +1,6 @@
   <div class="title-wrap">
     <div class="subtitle id-color wow fadeInUp" data-wow-delay=".2s">
-      <a href="<?php echo home_url('/services'); ?>" class="text-blue">
+      <a href="<?php echo home_url('/services/'); ?>" class="text-blue">
         <i class="fa-solid fa-arrow-left-long"></i> Services
       </a>
     </div>

@@ -128,27 +128,6 @@ function crossroads_theme_widgets_init() {
 add_action( 'widgets_init', 'crossroads_theme_widgets_init' );
 
 /**
- * Enqueue scripts and styles.
- */
-function crossroads_theme_scripts() {
-    // Enqueue the minified main stylesheet
-    wp_enqueue_style( 'crossroads_theme-style', get_template_directory_uri() . '/style.min.css', array(), _S_VERSION );
-
-    // IMPORTANT: Point the RTL stylesheet to the minified version as well!
-    // This assumes you have an rtl.min.css file in your theme root.
-    wp_style_add_data( 'crossroads_theme-style', 'rtl', 'style-rtl.min.css' ); // Changed from 'replace' or 'rtl.css' to 'style.min.css'
-
-    // Enqueue the minified navigation script
-    wp_enqueue_script( 'crossroads_theme-navigation', get_template_directory_uri() . '/js/navigation.min.js', array(), _S_VERSION, true );
-
-    // Conditionally enqueue comment-reply script (unchanged)
-    if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-        wp_enqueue_script( 'comment-reply' );
-    }
-}
-add_action( 'wp_enqueue_scripts', 'crossroads_theme_scripts' );
-
-/**
  * Implement the Custom Header feature.
  */
 require get_template_directory() . '/inc/custom-header.php';
@@ -234,17 +213,7 @@ add_action( 'enqueue_block_editor_assets', 'crossroads_enqueue_block_editor_asse
 /**
  * Load CSS.
  */
-// function crossroads_enqueue_styles() {
-//     wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
-// 	wp_enqueue_style('swiper-css', get_template_directory_uri() . '/assets/css/swiper.css');
-//     wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/style.min.css');
-// 	wp_enqueue_style('custom-mobile.css', get_template_directory_uri() . '/assets/css/style-mobile.min.css');
-
-// }
-// add_action('wp_enqueue_scripts', 'crossroads_enqueue_styles');
 function crossroads_async_styles() {
-    // Enqueue your main stylesheets normally.
-    // WordPress will print them as <link rel="stylesheet">
     wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
     wp_enqueue_style('swiper-css', get_template_directory_uri() . '/assets/css/swiper.css');
     wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/style.min.css');
@@ -252,7 +221,6 @@ function crossroads_async_styles() {
 }
 add_action('wp_enqueue_scripts', 'crossroads_async_styles'); // Use wp_enqueue_scripts for styles too
 
-// Filter to modify the CSS link tags for asynchronous loading
 function crossroads_add_async_attribute($tag, $handle, $href, $media) {
     $async_handles = array(
         'bootstrap-css',
@@ -262,26 +230,14 @@ function crossroads_add_async_attribute($tag, $handle, $href, $media) {
     );
 
     if ( in_array( $handle, $async_handles ) ) {
-        // Use media="print" to trick browsers into downloading non-render-blocking,
-        // then change to "all" with JS. Also use onload="this.media='all'" for modern browsers.
         return '<link rel="stylesheet" id="' . $handle . '" href="' . $href . '" media="print" onload="this.media=\'all\'">' . "\n" .
                '<noscript><link rel="stylesheet" id="' . $handle . '-noscript" href="' . $href . '" media="all"></noscript>' . "\n";
     }
     return $tag;
 }
-// Only apply this if you are NOT using a plugin that already handles critical CSS/async loading
-// add_filter('style_loader_tag', 'crossroads_add_async_attribute', 10, 4);
 /**
  * Load JS.
  */
-// function crossroads_enqueue_scripts() {
-//     wp_enqueue_script('jquery');
-//     wp_enqueue_script('plugins-js', get_template_directory_uri() . '/assets/js/plugins.js', ['jquery'], null, true);
-// 	wp_enqueue_script('designesia-js', get_template_directory_uri() . '/assets/js/designesia.min.js', ['jquery', 'plugins-js'], null, true);
-//     wp_enqueue_script('swiper-js', get_template_directory_uri() . '/assets/js/swiper.js', ['jquery'], null, true);
-//     wp_enqueue_script('custom-js', get_template_directory_uri() . '/assets/js/custom.min.js', ['jquery', 'designesia-js'], null, true);
-// }
-// add_action('wp_enqueue_scripts', 'crossroads_enqueue_scripts');
 function crossroads_enqueue_scripts() {
     wp_enqueue_script('jquery');
     wp_enqueue_script('plugins-js', get_template_directory_uri() . '/assets/js/plugins.js', ['jquery'], null, true);
@@ -292,22 +248,18 @@ function crossroads_enqueue_scripts() {
 add_action('wp_enqueue_scripts', 'crossroads_enqueue_scripts');
 
 function crossroads_add_defer_attribute($tag, $handle, $src) {
-    // Define an array of script handles that you want to defer
-    // These handles are the first argument you pass to wp_enqueue_script()
     $defer_handles = array(
-        'plugins-js',     // Your assets/js/plugins.js
-        'designesia-js',  // Your assets/js/designesia.min.js
-        'swiper-js',      // Your assets/js/swiper.js
-        'custom-js'       // Your assets/js/custom.min.js
+        'plugins-js',
+        'designesia-js',
+        'swiper-js',
+        'custom-js'
     );
 
-    // Check if the current script handle is in our defer list
     if ( in_array( $handle, $defer_handles ) ) {
-        // Add the 'defer' attribute to the script tag
         return '<script src="' . $src . '" defer></script>' . "\n";
     }
 
-    return $tag; // Return the original tag if not in the defer list
+    return $tag;
 }
 add_filter('script_loader_tag', 'crossroads_add_defer_attribute', 10, 3);
 
@@ -322,20 +274,20 @@ add_filter('script_loader_tag', 'crossroads_add_defer_attribute', 10, 3);
 //   }
 // }, 0);
 
-// New function to enqueue your self-hosted Font Awesome
+/**
+ * enqueue self-hosted Font Awesome
+ */
 function crossroads_enqueue_fontawesome_self_hosted() {
-    // Path to your local Font Awesome all.min.css file
     $fa_css_uri = get_template_directory_uri() . '/assets/fontawesome/css/all.min.css';
     $fa_css_path = get_template_directory() . '/assets/fontawesome/css/all.min.css';
 
-    // Use filemtime for cache busting on your Font Awesome CSS
-    $version = file_exists( $fa_css_path ) ? filemtime( $fa_css_path ) : '6.0.0'; // Fallback to original version if file not found
+    $version = file_exists( $fa_css_path ) ? filemtime( $fa_css_path ) : '6.0.0';
 
     wp_enqueue_style(
-        'font-awesome-self-hosted', // Unique handle for the self-hosted version
+        'font-awesome-self-hosted',
         $fa_css_uri,
-        [], // No dependencies for Font Awesome itself
-        $version // Dynamic version for cache busting
+        [],
+        $version
     );
 }
 add_action('wp_enqueue_scripts', 'crossroads_enqueue_fontawesome_self_hosted');
@@ -482,12 +434,9 @@ class Custom_Mobile_Menu_Walker extends Walker_Nav_Menu {
 
         $item_output = $args->before . '<a' . $attributes . ' class="menu-item">' . $args->link_before . $title . $args->link_after . '</a>' . $args->after;
 
-        // --- THIS IS THE CRUCIAL PART ---
-        // If the menu item has children, add the span with the Font Awesome icon
         if ( in_array( 'menu-item-has-children', $item->classes ) ) {
             $item_output .= '<span><i class="fas fa-chevron-down d-flex d-lg-none"></i></span>';
         }
-        // --- END CRUCIAL PART ---
 
         $output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );
     }
@@ -535,11 +484,12 @@ add_action('init', function () {
   );
 });
 
-add_image_size( 'slider-optimized', 768, 512, true ); // or adjust to match your layout
-
+add_image_size( 'slider-optimized', 768, 512, true );
+/**
+ * breadcrumbs
+ */
 add_filter('wpseo_breadcrumb_links', function($links) {
     foreach ($links as $key => $link) {
-        // Look for the taxonomy parent labeled "Services"
         if ($link['text'] === 'Services') {
             $links[$key]['url'] = home_url('/services/');
         }
@@ -550,15 +500,12 @@ add_filter('wpseo_breadcrumb_links', function($links) {
 add_filter('wpseo_breadcrumb_links', function($links) {
     global $post;
 
-    // Only run on single service pages
     if (is_singular('service')) {
         $terms = get_the_terms($post->ID, 'service-category');
         if (!empty($terms) && !is_wp_error($terms)) {
-            // Use the first term (or loop through if needed)
             $term = $terms[0];
             $term_link = get_term_link($term);
 
-            // Insert taxonomy term before the post title
             array_splice($links, -1, 0, [[
                 'url' => $term_link,
                 'text' => $term->name,
@@ -568,3 +515,8 @@ add_filter('wpseo_breadcrumb_links', function($links) {
 
     return $links;
 });
+
+add_filter( 'wpseo_breadcrumb_separator', 'custom_yoast_breadcrumb_separator' );
+function custom_yoast_breadcrumb_separator( $separator ) {
+    return '<span class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></span>';
+}

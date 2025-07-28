@@ -70,7 +70,7 @@
               ?>
               <div class="accordion-section-title" data-tab="#<?php echo esc_attr($faq_id); ?>">
                 <a href="<?php the_permalink(); ?>" class="faq-accordion-link">
-                  <?php the_title(); ?>
+                <?php the_title(); ?>
                 </a>
               </div>
               <div class="accordion-section-content" id="<?php echo esc_attr($faq_id); ?>">

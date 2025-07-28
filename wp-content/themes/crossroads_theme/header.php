@@ -32,7 +32,7 @@
     }
 
     // FAQ Archive Page
-    if (is_post_type_archive('faq')) {
+    if (is_post_type_archive('faq') || is_singular('faq')) {
       ?>
       <title>Dental FAQ | Crossroads Dental Toronto</title>
       <meta name="description" content="Have questions? Find answers to the most common dental and clinic questions at Crossroads Dental in Toronto. New patients welcome.">
@@ -123,7 +123,7 @@
 <body <?php body_class(); ?>>
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRGCBRB8"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <a href="#" id="back-to-top" aria-label="Back to Top">
+  <a id="back-to-top" aria-label="Back to Top">
       <span class="sr-only">Back to Top</span>
   </a>
 
