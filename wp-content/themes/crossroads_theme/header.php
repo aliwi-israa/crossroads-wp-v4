@@ -15,7 +15,6 @@
     // Team Member Archive Page
     if (is_post_type_archive('team_member')) {
       ?>
-      <title>Our Dental Team | Crossroads Dental Toronto</title>
       <meta name="description" content="Meet the friendly and experienced dental team at Crossroads Dental in Toronto. Providing expert, patient-focused care for smiles of all ages.">
       <!-- Open Graph (Facebook) -->
       <meta property="og:title" content="Our Dental Team | Crossroads Dental Toronto">
@@ -32,9 +31,8 @@
     }
 
     // FAQ Archive Page
-    if (is_post_type_archive('faq') || is_singular('faq')) {
+    if (is_post_type_archive('faq')) {
       ?>
-      <title>Dental FAQ | Crossroads Dental Toronto</title>
       <meta name="description" content="Have questions? Find answers to the most common dental and clinic questions at Crossroads Dental in Toronto. New patients welcome.">
       <!-- Open Graph (Facebook) -->
       <meta property="og:title" content="Dental FAQ | Crossroads Dental Toronto">
@@ -53,7 +51,6 @@
     // Services Archive Page
     if (is_post_type_archive('service') && !is_tax('service-category')) {
         ?>
-      <title>Dental Services | Crossroads Dental Toronto</title>
       <meta name="description" content="Explore expert dental services at Crossroads Dental in Toronto—from preventative care to cosmetic treatments. Your healthier smile starts here.">
       <!-- Open Graph (Facebook) -->
       <meta property="og:title" content="Dental Services | Crossroads Dental Toronto">

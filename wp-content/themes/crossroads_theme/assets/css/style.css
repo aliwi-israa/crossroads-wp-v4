@@ -121,6 +121,11 @@ body {
   overflow: hidden;
 }
 
+.text-wrap-normal {
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
 a,
 a:hover {
   color: var(--body-font-color);
@@ -2768,7 +2773,8 @@ span.service-item, ul.checked li {
 ul.checked li::before, .page-template-default main ul.wp-block-list li::before,
   .main-content ul:not(header ul):not(footer ul):not(.sidebar ul):not(ul.services-icon-list)  li::before,
   .page-template-default main ul li::before ,
-  ul.wp-block-list li:before {
+  ul.wp-block-list li:before,
+  .page-template-landing-page main ul li:before {
     content: "\f00c"; 
     font-family: "Font Awesome 6 Free";
     font-weight: 900;
@@ -2782,11 +2788,13 @@ ul.checked li::before, .page-template-default main ul.wp-block-list li::before,
   ul.wp-block-list li, .service-items li {
   margin-bottom: 24px;
   }
-.page-template-default main ul li, ul.wp-block-list li, .main-content ul:not(header ul):not(footer ul):not(.sidebar ul):not(ul.services-icon-list) li {
+.page-template-default main ul li, ul.wp-block-list li, .main-content ul:not(header ul):not(footer ul):not(.sidebar ul):not(ul.services-icon-list) li,
+.page-template-landing-page main ul li {
   list-style: none;
 
 }
-.page-template-default main ul li {
+.page-template-default main ul li,
+.page-template-landing-page main ul li {
   font-weight: normal;
   color: var(--secondary-color);
   position: relative;
@@ -2799,7 +2807,8 @@ ul.checked li::before, .page-template-default main ul.wp-block-list li::before,
   -webkit-border-radius: 0px;
   line-height: 1.6em;
 }
-.page-template-default main ul li:before {
+.page-template-default main ul li:before, 
+.page-template-landing-page main ul li:before{
   position: absolute;
   left: 0;
   font-family: "FontAwesome";
@@ -2815,7 +2824,8 @@ ul.checked li::before, .page-template-default main ul.wp-block-list li::before,
   -moz-border-radius: 0px;
   -webkit-border-radius: 0px;
 }
-.page-template-default main ul, ul.wp-block-list , .main-content ul:not(header ul):not(footer ul):not(.sidebar ul):not(ul.services-icon-list)  { 
+.page-template-default main ul, ul.wp-block-list , .main-content ul:not(header ul):not(footer ul):not(.sidebar ul):not(ul.services-icon-list),
+.page-template-landing-page main ul { 
   margin-left: 0;
   /* padding-left: 10px; */
     padding-left: 0;
@@ -3106,7 +3116,21 @@ header li.menu-item-has-children > a {
     clip: rect(0,0,0,0);
     white-space: nowrap;
     border: 0;
-  }
+}
+
+.bar-gray {
+  background: rgba(var(--primary-color-rgb), .1);
+}
+.bar h1.green {
+  color: var(--primary-color);
+}
+.bar-red {
+  background: #D13438;
+}
+.bar h1.white {
+  color: #ffffff;
+}
+
 @keyframes spin {
   to {
     transform: rotate(360deg);

@@ -892,6 +892,9 @@
     .video-container {
         flex-direction: column;
     }
+    .cta-btns {
+        flex-direction: column !important;
+    }
 }
 
 @media only screen and (max-width: 767px) {
@@ -1401,6 +1404,19 @@
 
     .logo-footer {
         height:unset;
+    }
+
+    .cta-btns {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        width: 70%;
+        align-items: center;
+        margin: auto;
+    }
+    .cta-btns a{
+        width: 100% !important;
+        justify-content: center;
     }
 }
 @media (min-width: 700px) and (max-width: 1024px) {

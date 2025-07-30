@@ -215,6 +215,7 @@ add_action( 'enqueue_block_editor_assets', 'crossroads_enqueue_block_editor_asse
  */
 function crossroads_async_styles() {
     wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
+    wp_enqueue_style('plugins-css', get_template_directory_uri() . '/assets/css/plugins.css');
     wp_enqueue_style('swiper-css', get_template_directory_uri() . '/assets/css/swiper.css');
     wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/style.min.css');
     wp_enqueue_style('custom-mobile.css', get_template_directory_uri() . '/assets/css/style-mobile.min.css');
@@ -224,6 +225,7 @@ add_action('wp_enqueue_scripts', 'crossroads_async_styles'); // Use wp_enqueue_s
 function crossroads_add_async_attribute($tag, $handle, $href, $media) {
     $async_handles = array(
         'bootstrap-css',
+        'plugins-css',
         'swiper-css',
         'custom-css',
         'custom-mobile.css'
