@@ -23,11 +23,7 @@
           ?>
         <?php endwhile; ?>
       <?php else: ?>
-        <!-- <div class="container"> -->
-          <section> 
         <?php the_content(); ?>
-        </section>
-        <!-- </div> -->
       <?php endif; ?>
   </div>
 </div>

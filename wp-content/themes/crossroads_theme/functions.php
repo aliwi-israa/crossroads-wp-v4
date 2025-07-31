@@ -465,27 +465,6 @@ function add_custom_body_class($classes) {
 }
 add_filter('body_class', 'add_custom_body_class');
 
-/**
- * patterns
- */
-add_action('init', function () {
-  // Register the pattern category once
-  register_block_pattern_category('custom', [
-    'label' => __('Custom Patterns', 'crossroads_theme'),
-  ]);
-
-  // Register both patterns
-  register_block_pattern(
-    'crossroads_theme/welcome-section',
-    require get_template_directory() . '/patterns/welcome-section.php'
-  );
-
-  register_block_pattern(
-    'crossroads_theme/why-choose-us',
-    require get_template_directory() . '/patterns/why-choose-us.php'
-  );
-});
-
 add_image_size( 'slider-optimized', 768, 512, true );
 /**
  * breadcrumbs
@@ -522,3 +501,22 @@ add_filter( 'wpseo_breadcrumb_separator', 'custom_yoast_breadcrumb_separator' );
 function custom_yoast_breadcrumb_separator( $separator ) {
     return '<span class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></span>';
 }
+
+/**
+ * patterns
+ */
+add_action('init', function () {
+  register_block_pattern_category('custom', [
+    'label' => __('Custom Patterns', 'crossroads_theme'),
+  ]);
+
+  register_block_pattern(
+    'crossroads_theme/content-block-image-left',
+    require get_template_directory() . '/patterns/content-block-image-left.php'
+  );
+    register_block_pattern(
+    'crossroads_theme/content-block-image-right',
+    require get_template_directory() . '/patterns/content-block-image-right.php'
+  );
+
+});

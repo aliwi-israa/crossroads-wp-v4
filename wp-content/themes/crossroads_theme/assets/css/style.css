@@ -3130,6 +3130,20 @@ header li.menu-item-has-children > a {
 .bar h1.white {
   color: #ffffff;
 }
+.reverse-on-mobile {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.wp-block-columns.is-layout-flex {
+  margin-bottom: 0;
+}
+@media (max-width: 768px) {
+  .reverse-on-mobile {
+    flex-direction: column-reverse !important;
+  }
+}
+
 
 @keyframes spin {
   to {
