@@ -46,6 +46,41 @@ function crossroads_theme_setup() {
 		*/
 	add_theme_support( 'post-thumbnails' );
 
+// In crossroads_theme/functions.php
+add_action( 'after_setup_theme', 'crossroads_theme_add_custom_image_sizes' );
+function crossroads_theme_add_custom_image_sizes() {
+    add_image_size( 'slider-mobile-xs', 320, 213, true ); 
+    add_image_size( 'slider-mobile', 430, 287, true );   
+    add_image_size( 'slider-tablet', 768, 512, true );    
+    add_image_size( 'slider-desktop-md', 1024, 683, true ); 
+}
+// No other code directly above or below this function or hook call for now.
+
+/**
+ * Adjust JPEG compression quality.
+ * This primarily affects newly uploaded JPEGs and regenerated JPEGs.
+ * If you're using a plugin for WebP conversion, that plugin's settings
+ * will likely control the WebP compression quality, overriding this filter for WebP.
+ * It's still good practice to have this if you ever serve JPEGs.
+ */
+add_filter( 'jpeg_quality', 'crossroads_theme_set_jpeg_quality' );
+function crossroads_theme_set_jpeg_quality( $quality ) {
+    return 75; // Set to 70-80 for a good balance of quality vs. file size
+}
+
+/**
+ * Optionally, you can also filter the quality for all image editors.
+ * This can be useful for plugins that might use this hook.
+ * Add if you find JPEG quality is still high despite the jpeg_quality filter.
+ */
+add_filter( 'wp_editor_set_quality', 'crossroads_theme_set_editor_quality', 10, 2 );
+function crossroads_theme_set_editor_quality( $quality, $mime_type ) {
+    if ( 'image/jpeg' === $mime_type || 'image/webp' === $mime_type ) {
+        return 75; // Apply to JPEG and WebP if the context allows
+    }
+    return $quality;
+}
+
 	/*
 		* Switch default core markup for search form, comment form, and comments
 		* to output valid HTML5.
@@ -216,9 +251,9 @@ add_action( 'enqueue_block_editor_assets', 'crossroads_enqueue_block_editor_asse
 function crossroads_async_styles() {
     wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
     wp_enqueue_style('plugins-css', get_template_directory_uri() . '/assets/css/plugins.css');
-    wp_enqueue_style('swiper-css', get_template_directory_uri() . '/assets/css/swiper.css');
+    // wp_enqueue_style('swiper-css', get_template_directory_uri() . '/assets/css/swiper.css');
     wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/style.min.css');
-    wp_enqueue_style('custom-mobile.css', get_template_directory_uri() . '/assets/css/style-mobile.min.css');
+    // wp_enqueue_style('custom-mobile.css', get_template_directory_uri() . '/assets/css/style-mobile.min.css');
 }
 add_action('wp_enqueue_scripts', 'crossroads_async_styles'); // Use wp_enqueue_scripts for styles too
 
@@ -226,9 +261,9 @@ function crossroads_add_async_attribute($tag, $handle, $href, $media) {
     $async_handles = array(
         'bootstrap-css',
         'plugins-css',
-        'swiper-css',
+        // 'swiper-css',
         'custom-css',
-        'custom-mobile.css'
+        // 'custom-mobile.css'
     );
 
     if ( in_array( $handle, $async_handles ) ) {
@@ -241,7 +276,7 @@ function crossroads_add_async_attribute($tag, $handle, $href, $media) {
  * Load JS.
  */
 function crossroads_enqueue_scripts() {
-    wp_enqueue_script('jquery');
+    // wp_enqueue_script('jquery');
     wp_enqueue_script('plugins-js', get_template_directory_uri() . '/assets/js/plugins.js', ['jquery'], null, true);
 	wp_enqueue_script('designesia-js', get_template_directory_uri() . '/assets/js/designesia.min.js', ['jquery', 'plugins-js'], null, true);
     wp_enqueue_script('swiper-js', get_template_directory_uri() . '/assets/js/swiper.js', ['jquery'], null, true);

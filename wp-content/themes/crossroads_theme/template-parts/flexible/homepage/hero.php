@@ -14,24 +14,36 @@
             ?>
             <div class="swiper-slide">
               <div class="swiper-inner">
-              <?php
-              $image_id = $img['id']; // assuming you have the attachment ID
-              // $image_srcset = wp_get_attachment_image_srcset( $image_id, 'full' );
-              $image_srcset = wp_get_attachment_image_srcset( $image_id, 'slider-optimized' );
+<?php
+$image_id = $img['id'];
 
-              $sizes = '(max-width: 480px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 80vw, 1280px';
-              ?>
-              <img 
-                src="<?php echo esc_url($img['url']); ?>"
-                srcset="<?php echo esc_attr($image_srcset); ?>"
-                sizes="<?php echo esc_attr($sizes); ?>"
-                alt="<?php echo esc_html($subheading); ?>"
-                fetchpriority="high"
-                decoding="async"
-                width="1280"
-                height="853"
-                loading="<?php echo $slide_count === 1 ? 'eager' : 'lazy'; ?>"
-              />
+// Get all registered sizes in the srcset
+$image_srcset = wp_get_attachment_image_srcset( $image_id, 'full' ); 
+
+// Define the sizes attribute to match your CSS layout precisely
+$sizes = '(max-width: 480px) 430px, ' . // If mobile viewport is <= 480px, image is 430px wide
+         '(max-width: 768px) 768px, ' . // If tablet viewport is <= 768px, image is 768px wide
+         '(max-width: 1024px) 1024px, ' . // If small desktop is <= 1024px, image is 1024px wide
+         '1280px'; // Default for larger screens
+
+// Adjust the values if your inspection showed different rendered widths for tablet/desktop too.
+// If your image takes up 100% of the viewport on mobile (and your viewport is 430px), you could use 100vw,
+// but if the viewport changes (e.g., 360px) and your image is still 430px due to fixed width CSS,
+// then '430px' is more accurate. If it scales with viewport, use '100vw' or 'calc(100vw - Xpx)'.
+// Re-verify the rendered width on tablet (768px) and desktop (1024px, 1280px) as well.
+
+?>
+<img 
+    src="<?php echo esc_url($img['url']); ?>"
+    srcset="<?php echo esc_attr($image_srcset); ?>"
+    sizes="<?php echo esc_attr($sizes); ?>"
+    alt="<?php echo esc_html($subheading); ?>"
+    fetchpriority="high"
+    decoding="async"
+    width="1280" 
+    height="853"
+    loading="<?php echo $slide_count === 1 ? 'eager' : 'lazy'; ?>"
+/>
 
                 
                 <div class="sw-overlay op-5"></div>
