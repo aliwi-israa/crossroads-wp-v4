@@ -120,10 +120,11 @@
 <body <?php body_class(); ?>>
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRGCBRB8"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <nav>
   <a id="back-to-top" aria-label="Back to Top">
       <span class="sr-only">Back to Top</span>
   </a>
-
+  </nav>
   <div id="de-loader"></div>
 
   <header class="transparent scroll-light">

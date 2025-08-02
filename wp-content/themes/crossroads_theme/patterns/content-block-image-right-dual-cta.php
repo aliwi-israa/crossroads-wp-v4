@@ -1,10 +1,10 @@
 <?php
 return [
-  'title'       => __('Content Block (Image on Right)', 'crossroads_theme'),
-  'slug'        => 'crossroads_theme/content-block-image-right',
+  'title'       => __('Content Block (Image Right + Dual CTA Buttons)', 'crossroads_theme'),
+  'slug'        => 'crossroads_theme/content-block-image-right-dual-cta',
   'categories'  => ['custom'],
-  'keywords'    => ['content', 'image right', 'text', 'cta'],
-  'description' => __('A two-column section with content on the left and image on the right.', 'crossroads_theme'),
+  'keywords'    => ['content', 'image right', 'text', 'cta', 'dual buttons'],
+  'description' => __('A two-column section with image and text, plus two CTA buttons side by side.', 'crossroads_theme'),
   'content'     =>
     '<!-- wp:group {"tagName":"section","className":"welcome-section bg-color bg-color-op-1","layout":{"type":"constrained"}} -->
     <section class="wp-block-group welcome-section bg-color bg-color-op-1">
@@ -29,10 +29,15 @@ return [
             <!-- /wp:paragraph -->
 
             <!-- wp:buttons -->
-            <div class="wp-block-buttons">
+            <div class="wp-block-buttons cta-btns mt-auto">
               <!-- wp:button {"className":"is-style-fill"} -->
               <div class="wp-block-button is-style-fill">
                 <a class="wp-block-button__link" href="https://akitu.io/hPu3g" target="_blank" rel="noopener"><span>Book Appointment</span></a>
+              </div>
+              <!-- /wp:button -->
+              <!-- wp:button {"className":"is-style-fill"} -->
+              <div class="wp-block-button secondary is-style-fill">
+                <a class="wp-block-button__link" href="tel:(416) 623-8443" target="_blank" rel="noopener"><span>Call Us</span></a>
               </div>
               <!-- /wp:button -->
             </div>
@@ -49,7 +54,18 @@ return [
                     <img src="' . esc_url( get_template_directory_uri() ) . '/assets/images/placeholder.webp" alt="Why Choose Crossroads Dental Clinic" />
                 </figure>
                 <!-- /wp:image -->
-                  </div>
+                <!-- wp:group -->
+                <div class="wp-block-group">
+                <!-- wp:image {"url":"https://www.deardoctor.com/images/video-gallery/play/emergency-dental-care.jpg","linkDestination":"custom","href":"//fast.wistia.net/embed/iframe/pjkwm6m89d?popover=true","className":"wistia-popover[height=360,playerColor=8c8c8c,width=640]"} -->
+                <figure class="wp-block-image">
+                    <a href="//fast.wistia.net/embed/iframe/pjkwm6m89d?popover=true" class="wistia-popover[height=360,playerColor=8c8c8c,width=640]">
+                    <img src="https://www.deardoctor.com/images/video-gallery/play/emergency-dental-care.jpg" alt="Emergency Dentistry Explained" />
+                    </a>
+                </figure>
+                <!-- /wp:image -->
+                </div>
+                <!-- /wp:group -->
+            </div>
               <!-- /wp:group -->
 
               </div>

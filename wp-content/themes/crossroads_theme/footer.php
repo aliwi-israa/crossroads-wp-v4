@@ -104,7 +104,6 @@
             <ul class="menu-simple">
               <li><a href="<?php echo esc_url(get_permalink(get_page_by_path('terms-and-conditions'))); ?>">Terms &amp; Conditions</a></li>
               <li><a href="<?php echo esc_url(get_permalink(get_page_by_path('privacy-policy'))); ?>">Privacy Policy</a></li>
-              <div style="display:none;"><a href="https://crossroadsdental.ca/locations.kml" rel="nofollow">KML Location Data</a></div>
             </ul>
           </div>
         </div>
@@ -117,6 +116,9 @@
   <script>
   window.addEventListener('load', () => {
     document.getElementById('loader').style.display = 'none';
+  });
+  document.querySelectorAll('.wp-block-button__link').forEach(btn => {
+    btn.setAttribute('data-hover', btn.textContent.trim());
   });
 </script>
 </body>

@@ -1,10 +1,10 @@
 <?php
 return [
-  'title'       => __('Content Block (Image on Left)', 'crossroads_theme'),
-  'slug'        => 'crossroads_theme/content-block-image-left',
+  'title'       => __('Content Block (Image Left + Dual CTA Buttons)', 'crossroads_theme'),
+  'slug'        => 'crossroads_theme/content-block-image-left-dual-cta',
   'categories'  => ['custom'],
-  'keywords'    => ['content', 'image left', 'text', 'cta'],
-  'description' => __('A two-column section with image and text, plus CTA.', 'crossroads_theme'),
+  'keywords'    => ['content', 'image left', 'text', 'cta', 'dual buttons'],
+  'description' => __('A two-column section with image and text, plus two CTA buttons side by side.', 'crossroads_theme'),
   'content'     =>
     '<!-- wp:group {"tagName":"section","className":"container"} -->
     <section class="wp-block-group container">
@@ -46,10 +46,15 @@ return [
             <!-- /wp:paragraph -->
 
             <!-- wp:buttons -->
-            <div class="wp-block-buttons">
+            <div class="wp-block-buttons cta-btns mt-auto">
               <!-- wp:button {"className":"is-style-fill"} -->
               <div class="wp-block-button is-style-fill">
                 <a class="wp-block-button__link" href="https://akitu.io/hPu3g" target="_blank" rel="noopener"><span>Book Appointment</span></a>
+              </div>
+              <!-- /wp:button -->
+              <!-- wp:button {"className":"is-style-fill"} -->
+              <div class="wp-block-button secondary is-style-fill">
+                <a class="wp-block-button__link" href="tel:(416) 623-8443" target="_blank" rel="noopener"><span>Call Us</span></a>
               </div>
               <!-- /wp:button -->
             </div>

@@ -3,7 +3,7 @@
     $email = get_field('ClinicEmail', 'option') ?: 'info@crossroadsdental.ca';
     $info_label = get_sub_field('info_label');
 ?>
-<section class="bg-dark text-light pt-50 pb-30 slider">
+<section class="bg-dark text-light pt-50 pb-30 slider" aria-label="Contact Information">
     <div class="container relative slider-contact">
         <div class="row g-4 grid-divider slider-contact">
             <div class="col-lg-4 col-md-6 mb-sm-30 wrapper">

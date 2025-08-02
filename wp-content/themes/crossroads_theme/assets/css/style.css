@@ -1035,7 +1035,7 @@ a {
   }
 
 a.btn-main:hover,
-.wp-block-button:hover,
+/* .wp-block-button:hover, */
 .btn-main:hover,
 a.btn-main.btn-line:hover {
   color: #fff;
@@ -1102,12 +1102,14 @@ a.btn-line {
 }
 
 a.btn-main.fx-slide,
+a.wp-block-button__link,
 a.btn-secondary.fx-slide,
 .wp-block-button {
   overflow: hidden;
 }
 
 a.btn-main.fx-slide span,
+a.wp-block-button__link span,
 a.btn-secondary.fx-slide span,
 .wp-block-button .wp-element-button  {
   display: block;
@@ -1116,13 +1118,15 @@ a.btn-secondary.fx-slide span,
 }
 
 a.btn-main.fx-slide:hover span,
-a.btn-secondary.fx-slide:hover span ,
-.wp-block-button:hover .wp-element-button  {
+a.wp-block-button__link:hover span,
+a.wp-block-button__link:hover span
+a.btn-secondary.fx-slide:hover span { 
   transform: translate(0, 40px);
   opacity: 0;
 }
 
 a.btn-main.fx-slide:hover:before,
+a.wp-block-button__link:hover:before,
 a.btn-secondary.fx-slide:hover:before ,
 .wp-block-button:hover:before {
   opacity: 1;
@@ -1130,6 +1134,7 @@ a.btn-secondary.fx-slide:hover:before ,
 }
 
 a.btn-main.fx-slide:before,
+a.wp-block-button__link:before,
 a.btn-secondary.fx-slide:before,
 .wp-block-button:before  {
   content: attr(data-hover);
@@ -1566,7 +1571,8 @@ a.btn-outline-white:hover {
   border: 1px solid var(--primary-color);
 }
 
-body.subpage a.btn-outline-white:hover {
+body.subpage a.btn-outline-white:hover,
+body.subpage .secondary a.wp-block-button__link:hover {
   color: var(--primary-color);
   background: #ffffff;
 }
@@ -1577,7 +1583,8 @@ a.btn-outline-white:focus,
 a.btn-outline-white:visited,
 .btn-outline-white,
 input[type=button].btn-outline-white,
-#mainmenu li ul.mega a.btn-outline-white {
+#mainmenu li ul.mega a.btn-outline-white,
+div.secondary.wp-block-button {
   color: var(--primary-color);
   background: #ffffff;
   font-family: var(--btn-font-family);
@@ -1615,15 +1622,18 @@ a.btn-outline-white {
   transition: color 0.2s ease-in-out, background-color 0.4s ease-in-out;
 }
 
-body.subpage a.btn-outline-white {
-  border-color: var(--primary-color);
+body.subpage a.btn-outline-white,
+body.subpage div.wp-block-button {
+  border-color: var(--primary-color) !important;
 }
 
-body.subpage a.btn-outline-white {
+body.subpage a.btn-outline-white,
+body.subpage .secondary a.wp-block-button__link {
   color: var(--primary-color);
 }
 
-a.btn-outline-white {
+a.btn-outline-white,
+body.subpage div.wp-block-button.secondary {
   border: 2px solid #fff;
   color: #fff;
   background-color: transparent;
@@ -1634,6 +1644,12 @@ a.btn-outline-white:hover {
   background: var(--primary-color);
   color: #ffffff;
   border-color: var(--primary-color);
+}
+body.subpage div.wp-block-button.secondary:hover,
+body.subpage a.wp-block-button__link span:hover ,
+body.subpage a.wp-block-button__link:hover  {
+    background: unset !important;
+    background-color: unset !important;
 }
 
 a.btn-outline-white:focus,
@@ -1669,7 +1685,7 @@ a.btn-outline-white:hover {
     flex-direction: column-reverse;
   }
 
-  .subpage a.btn-main {
+  .subpage a.btn-main, div.wp-block-button {
     margin: auto;
     width: fit-content;
     display: flex;
@@ -1715,6 +1731,10 @@ a.btn-line:after,
   -webkit-transition: .2s ease;
   transition: .2s ease;
   outline: none;
+}
+.wp-block-buttons .wp-block-button span {
+  display: inline;
+  white-space: nowrap; 
 }
 
 @-webkit-keyframes scaleIn {
@@ -2785,7 +2805,7 @@ ul.checked li::before, .page-template-default main ul.wp-block-list li::before,
 .page-template-default main .breadcrumbs ul li::before {
   content: none;
 }
-  ul.wp-block-list li, .service-items li {
+  .service-items li {
   margin-bottom: 24px;
   }
 .page-template-default main ul li, ul.wp-block-list li, .main-content ul:not(header ul):not(footer ul):not(.sidebar ul):not(ul.services-icon-list) li,
@@ -4602,16 +4622,19 @@ img {
     }
 
     .cta-btns {
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
-        width: 70%;
-        align-items: center;
-        margin: auto;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 1rem;
     }
-    .cta-btns a{
-        width: 100% !important;
-        justify-content: center;
+
+    .cta-btns .wp-block-button {
+      flex: 1 1 50%;
+    }
+
+    .cta-btns .wp-block-button__link {
+      display: block;
+      width: 100%;
+      text-align: center;
     }
 }
 @media (min-width: 700px) and (max-width: 1024px) {

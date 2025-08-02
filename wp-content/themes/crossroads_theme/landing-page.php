@@ -63,14 +63,8 @@ $google_maps_url = 'https://www.google.com/maps/search/' . urlencode($address);
         <div id="de-loader"></div>
 
         <header class="transparent scroll-light">
-            <section class="bar p-2 p-md-3 text-center <?php echo esc_attr($bar_color); ?>"> <div class="container position-relative">
-                <div class="row">
-                    <div class="col-12">
-                        <h1 class="h4 mb-0 <?php echo esc_attr($text_color); ?>"><?php echo esc_html($bar); ?></h1>
-                    </div>
-                </div>
-                </div>
-            </section>
+            <?php get_template_part('template-parts/bar'); ?>
+
             <div class="container p-0">
                 <div class="row">
                     <div class="col-md-12">
@@ -118,21 +112,7 @@ $google_maps_url = 'https://www.google.com/maps/search/' . urlencode($address);
 
         <div id="page" class="font-inter antialiased text-gray-800" style="padding-top:100px;">
             <main>
-                <?php if (have_rows('flexible_content_block')): ?>
-                    <?php while (have_rows('flexible_content_block')): the_row(); ?>
-                    <?php
-                        $layout = get_row_layout();
-                        if ($layout === 'content_block') {
-                        get_template_part('template-parts/flexible/content', 'section');
-                        }
-                    ?>
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <section> 
-                        <?php the_content(); ?>
-                    </section>
-                <?php endif; ?>
-
+                <?php the_content(); ?>
                 <?php get_template_part('partials/faqs'); ?>
 
                 <section class="m-0 p-0">
@@ -192,7 +172,11 @@ $google_maps_url = 'https://www.google.com/maps/search/' . urlencode($address);
                     loader.style.display = 'none';
                 }
             });
+              document.querySelectorAll('.wp-block-button__link').forEach(btn => {
+                btn.setAttribute('data-hover', btn.textContent.trim());
+            });
         </script>
+        <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/popover-v1.js"></script>
         <?php wp_footer(); ?>
     </body>
 </html>

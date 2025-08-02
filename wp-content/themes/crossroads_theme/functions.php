@@ -45,42 +45,33 @@ function crossroads_theme_setup() {
 		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
 		*/
 	add_theme_support( 'post-thumbnails' );
-
-// In crossroads_theme/functions.php
-add_action( 'after_setup_theme', 'crossroads_theme_add_custom_image_sizes' );
-function crossroads_theme_add_custom_image_sizes() {
-    add_image_size( 'slider-mobile-xs', 320, 213, true ); 
-    add_image_size( 'slider-mobile', 430, 287, true );   
-    add_image_size( 'slider-tablet', 768, 512, true );    
-    add_image_size( 'slider-desktop-md', 1024, 683, true ); 
-}
-// No other code directly above or below this function or hook call for now.
-
-/**
- * Adjust JPEG compression quality.
- * This primarily affects newly uploaded JPEGs and regenerated JPEGs.
- * If you're using a plugin for WebP conversion, that plugin's settings
- * will likely control the WebP compression quality, overriding this filter for WebP.
- * It's still good practice to have this if you ever serve JPEGs.
- */
-add_filter( 'jpeg_quality', 'crossroads_theme_set_jpeg_quality' );
-function crossroads_theme_set_jpeg_quality( $quality ) {
-    return 75; // Set to 70-80 for a good balance of quality vs. file size
-}
-
-/**
- * Optionally, you can also filter the quality for all image editors.
- * This can be useful for plugins that might use this hook.
- * Add if you find JPEG quality is still high despite the jpeg_quality filter.
- */
-add_filter( 'wp_editor_set_quality', 'crossroads_theme_set_editor_quality', 10, 2 );
-function crossroads_theme_set_editor_quality( $quality, $mime_type ) {
-    if ( 'image/jpeg' === $mime_type || 'image/webp' === $mime_type ) {
-        return 75; // Apply to JPEG and WebP if the context allows
+    /**
+     * Optimize image sizes for better performance.
+     */
+    add_action( 'after_setup_theme', 'crossroads_theme_add_custom_image_sizes' );
+    function crossroads_theme_add_custom_image_sizes() {
+        add_image_size( 'slider-mobile-xs', 320, 213, true ); 
+        add_image_size( 'slider-mobile', 430, 287, true );   
+        add_image_size( 'slider-tablet', 768, 512, true );    
+        add_image_size( 'slider-desktop-md', 1024, 683, true ); 
     }
-    return $quality;
-}
-
+    /**
+     * Adjust JPEG compression quality.
+     */
+    add_filter( 'jpeg_quality', 'crossroads_theme_set_jpeg_quality' );
+    function crossroads_theme_set_jpeg_quality( $quality ) {
+        return 75; // Set to 70-80 for a good balance of quality vs. file size
+    }
+    /**
+     * Filter the quality for all image editors.
+     */
+    add_filter( 'wp_editor_set_quality', 'crossroads_theme_set_editor_quality', 10, 2 );
+    function crossroads_theme_set_editor_quality( $quality, $mime_type ) {
+        if ( 'image/jpeg' === $mime_type || 'image/webp' === $mime_type ) {
+            return 75; // Apply to JPEG and WebP if the context allows
+        }
+        return $quality;
+    }
 	/*
 		* Switch default core markup for search form, comment form, and comments
 		* to output valid HTML5.
@@ -251,9 +242,7 @@ add_action( 'enqueue_block_editor_assets', 'crossroads_enqueue_block_editor_asse
 function crossroads_async_styles() {
     wp_enqueue_style('bootstrap-css', get_template_directory_uri() . '/assets/css/bootstrap.min.css');
     wp_enqueue_style('plugins-css', get_template_directory_uri() . '/assets/css/plugins.css');
-    // wp_enqueue_style('swiper-css', get_template_directory_uri() . '/assets/css/swiper.css');
     wp_enqueue_style('custom-css', get_template_directory_uri() . '/assets/css/style.min.css');
-    // wp_enqueue_style('custom-mobile.css', get_template_directory_uri() . '/assets/css/style-mobile.min.css');
 }
 add_action('wp_enqueue_scripts', 'crossroads_async_styles'); // Use wp_enqueue_scripts for styles too
 
@@ -261,9 +250,7 @@ function crossroads_add_async_attribute($tag, $handle, $href, $media) {
     $async_handles = array(
         'bootstrap-css',
         'plugins-css',
-        // 'swiper-css',
         'custom-css',
-        // 'custom-mobile.css'
     );
 
     if ( in_array( $handle, $async_handles ) ) {
@@ -536,7 +523,6 @@ add_filter( 'wpseo_breadcrumb_separator', 'custom_yoast_breadcrumb_separator' );
 function custom_yoast_breadcrumb_separator( $separator ) {
     return '<span class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></span>';
 }
-
 /**
  * patterns
  */
@@ -553,5 +539,20 @@ add_action('init', function () {
     'crossroads_theme/content-block-image-right',
     require get_template_directory() . '/patterns/content-block-image-right.php'
   );
-
+    register_block_pattern(
+    'crossroads_theme/content-block-image-left-dual-cta',
+    require get_template_directory() . '/patterns/content-block-image-left-dual-cta.php'
+  );
+    register_block_pattern(
+    'crossroads_theme/ content-block-image-right-dual-cta',
+    require get_template_directory() . '/patterns/content-block-image-right-dual-cta.php'
+  );
+ 
+});
+/**
+ * remove kml from sitemap
+ */
+add_filter('wpseo_sitemap_exclude_post_type', function($excluded_post_types) {
+  $excluded_post_types[] = 'locations.kml'; // Replace with actual post type if needed
+  return $excluded_post_types;
 });
