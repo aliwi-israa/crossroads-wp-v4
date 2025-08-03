@@ -1736,7 +1736,18 @@ a.btn-line:after,
   display: inline;
   white-space: nowrap; 
 }
+.wp-custom-accordion .accordion-section-content {
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
 
+.wp-custom-accordion .accordion-section-content.open {
+  opacity: 1;
+}
+.wp-block-buttons.cta-btns{
+  /* margin: unset !important; */
+  margin-top: 30px !important;
+}
 @-webkit-keyframes scaleIn {
   from {
     opacity: 0;

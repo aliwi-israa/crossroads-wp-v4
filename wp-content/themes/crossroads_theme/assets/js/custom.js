@@ -104,3 +104,69 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+//accordion for defaul wp Details
+document.addEventListener('DOMContentLoaded', function () {
+  const wpAccordions = document.querySelectorAll('.wp-block-details');
+
+  wpAccordions.forEach(function (detailsElement, index) {
+    const summary = detailsElement.querySelector('summary');
+    if (!summary) return;
+
+    const accordionSection = document.createElement('div');
+    accordionSection.className = 'accordion-section wp-custom-accordion';
+    accordionSection.dataset.source = 'details';
+
+    const titleDiv = document.createElement('div');
+    titleDiv.className = 'accordion-section-title';
+    titleDiv.setAttribute('data-tab', `#accordion-${index}`);
+    titleDiv.innerHTML = summary.innerHTML;
+
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'accordion-section-content';
+    contentDiv.id = `accordion-${index}`;
+    contentDiv.style.overflow = 'hidden';
+    contentDiv.style.maxHeight = '0';
+    contentDiv.style.transition = 'max-height 0.3s ease';
+
+    let nextEl = summary.nextElementSibling;
+    while (nextEl) {
+      const next = nextEl.nextElementSibling;
+      contentDiv.appendChild(nextEl);
+      nextEl = next;
+    }
+
+    accordionSection.appendChild(titleDiv);
+    accordionSection.appendChild(contentDiv);
+    detailsElement.replaceWith(accordionSection);
+
+    titleDiv.addEventListener('click', function (event) {
+    event.stopPropagation();
+
+    const isOpen = contentDiv.classList.contains('open');
+
+    document.querySelectorAll('.wp-block-details + .accordion-section .accordion-section-content.open').forEach(function (otherSection) {
+        if (otherSection !== contentDiv) {
+        otherSection.classList.remove('open');
+        otherSection.style.maxHeight = '0';
+        }
+    });
+
+    if (!isOpen) {
+    contentDiv.style.display = 'block';
+    contentDiv.style.maxHeight = 'none';
+    
+    const fullHeight = contentDiv.scrollHeight;
+
+    contentDiv.style.maxHeight = '0';
+    contentDiv.style.display = '';
+    
+    contentDiv.offsetHeight;
+
+    contentDiv.classList.add('open');
+    contentDiv.style.maxHeight = fullHeight + 'px';
+    }
+
+    });
+
+  });
+});

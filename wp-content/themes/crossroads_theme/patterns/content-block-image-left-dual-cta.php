@@ -22,14 +22,22 @@ return [
                     <img src="' . esc_url( get_template_directory_uri() ) . '/assets/images/placeholder.webp" alt="Why Choose Crossroads Dental Clinic" />
                 </figure>
                 <!-- /wp:image -->
+                <!-- wp:group -->
+                <div class="wp-block-group">
+                <!-- wp:image {"url":"https://www.deardoctor.com/images/video-gallery/play/emergency-dental-care.jpg","linkDestination":"custom","href":"//fast.wistia.net/embed/iframe/pjkwm6m89d?popover=true","className":"wistia-popover[height=360,playerColor=8c8c8c,width=640]"} -->
+                <figure class="wp-block-image">
+                    <a href="//fast.wistia.net/embed/iframe/pjkwm6m89d?popover=true" class="wistia-popover[height=360,playerColor=8c8c8c,width=640]">
+                    <img src="https://www.deardoctor.com/images/video-gallery/play/emergency-dental-care.jpg" alt="Emergency Dentistry Explained" />
+                    </a>
+                </figure>
+                <!-- /wp:image -->
+                </div>
+                <!-- /wp:group -->
                   </div>
               <!-- /wp:group -->
 
               </div>
               <!-- /wp:column -->
-
-
-
           <!-- wp:column -->
           <div class="wp-block-column">
 
