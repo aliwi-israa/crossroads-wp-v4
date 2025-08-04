@@ -100,7 +100,7 @@ $row_class .= ($image_direction === 'isImgRight') ? ' flex-row-reverse' : ' flex
             endif;
           ?>
         <div class="cta-btns mt-auto">
-            <a class="btn-main fx-slide" href="<?php echo esc_url($booking_link); ?>" target="_blank" rel="noopener">
+            <a class="btn-main fx-slide" href="<?php echo esc_url($booking_link); ?>" target="_blank" rel="noopener" aria-label="Book Appointment">
                 <span>Book Appointment</span>
             </a>
             <a class="btn-main fx-slide btn-outline-white" href="tel:<?php echo esc_attr($phone); ?>">

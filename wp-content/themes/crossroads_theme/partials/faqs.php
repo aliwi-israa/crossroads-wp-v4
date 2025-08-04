@@ -14,7 +14,7 @@ if ($faqs) :
                             <h2 class="wow fadeInUp text-wrap-normal" data-wow-delay=".2s">Frequently Asked Questions</h2>
                         </div>
                         <div class="mt-auto d-lg-block d-none">
-                            <a class="btn-main fx-slide" href="<?php echo esc_url($booking_link); ?>" target="_blank" rel="noopener">
+                            <a class="btn-main fx-slide" href="<?php echo esc_url($booking_link); ?>" target="_blank" rel="noopener" aria-label="Book Appointment">
                                 <span>Book Appointment</span>
                             </a>
                             <a class="btn-main fx-slide btn-outline-white" href="tel:<?php echo esc_attr($phone); ?>">

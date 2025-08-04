@@ -50,7 +50,7 @@ if (have_posts()) :
                                 </a>
                             </div>
                             <div class="cta-book">
-                                <a class="btn-main fx-slide" href="<?php echo esc_url(home_url()); ?>">
+                                <a class="btn-main fx-slide" href="<?php echo esc_url(home_url()); ?>" aria-label="Back to Homepage">
                                     <span>Back to Homepage</span>
                                 </a>
                             </div>

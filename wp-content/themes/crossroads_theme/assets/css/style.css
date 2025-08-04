@@ -1744,9 +1744,12 @@ a.btn-line:after,
 .wp-custom-accordion .accordion-section-content.open {
   opacity: 1;
 }
-.wp-block-buttons.cta-btns{
-  /* margin: unset !important; */
-  margin-top: 30px !important;
+.wp-block-buttons {
+  margin: unset !important;
+}
+.accordion-section.wp-custom-accordion:has(+ .wp-block-buttons),
+.accordion-section.wp-custom-accordion:has(+ .wp-block-buttons ~ *) {
+  margin-bottom: 30px;;
 }
 @-webkit-keyframes scaleIn {
   from {

@@ -65,7 +65,7 @@ $external_link = get_sub_field('external_link');
                         <?php if ($service_link) : ?>
                             <a class="btn-plus text-blue mt-auto" href="<?php echo esc_url($service_link); ?>">
                                 <i class="fa fa-plus" aria-hidden="true"></i>
-                                <span>Read More <span class="sr-only"> about <?php echo esc_html($service_title); ?></span></span>
+                                <span aria-label="about <?php echo esc_html($service_title); ?>">Read More <span class="sr-only" aria-label="about <?php echo esc_html($service_title); ?>"> about <?php echo esc_html($service_title); ?></span></span>
                             </a>
                         <?php endif; ?>
 

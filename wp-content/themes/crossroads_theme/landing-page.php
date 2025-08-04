@@ -73,9 +73,9 @@ $google_maps_url = 'https://www.google.com/maps/search/' . urlencode($address);
                             <div class="de-flex-col">
                                 <div id="logo">
                                     <a href="<?php echo home_url(); ?>">
-                                        <img class="logo-main" src="<?php echo esc_url($logo_main_url); ?>" alt="Logo" width="265" height="76" fetchpriority="high" loading="eager">
-                                        <img class="logo-scroll" src="<?php echo esc_url($logo_scroll_url); ?>" alt="Logo Scroll" width="265" height="76">
-                                        <img class="logo-mobile" src="<?php echo esc_url($logo_mobile_url); ?>" alt="Logo Mobile" width="265" height="76">
+                                        <img class="logo-main" src="<?php echo esc_url($logo_main_url); ?>" alt="Crossroads Dental Clinic Logo" width="265" height="76" fetchpriority="high" loading="eager">
+                                        <img class="logo-scroll" src="<?php echo esc_url($logo_scroll_url); ?>" alt="Crossroads Dental Clinic Logo" width="265" height="76">
+                                        <img class="logo-mobile" src="<?php echo esc_url($logo_mobile_url); ?>" alt="Crossroads Dental Clinic Logo" width="265" height="76">
                                     </a>
                                 </div>
                             </div>
